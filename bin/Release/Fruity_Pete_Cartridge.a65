@@ -1,0 +1,8019 @@
+;CartridgeXEX            = 00; Set to load as an XEX file
+;CartridgeStandard8K     = 01  ;Standard 08K Cartridge
+;CartridgeStandard16K    = 02  ;*** Standard 16K Cartridge ***
+;CartTypeOSS16K          = 03  ;OSS 16 KB Cartridge            $B000-$BFFF always Mapped. D5x0/1 for A, D5x3/7 for B, D5x4/5 for C. D5x2/6, x6 Disables. 
+;CartType520032K         = 04  ;32K 5200 Cartridge
+;CartTypeDB32K           = 05  ;32K DB Cartridge
+;CartType520016K2        = 06  ;16K 5200 Cartridge 2 Chip  ;$4000-$5FFF + $6000-$7FFF First 8K, $8000-$9FFF + $A000-$BFFF Second 8K
+;CartType520040K         = 07  ;Bounty Bob 5200 40K 
+;CartTypeWilliams64      = 08  ;*** Williams 64K Cartridge ***  8 banks mapped to $A000-$BFFF.  Access $D500 to $D507. Access to $D508 Disables the Cartridge.
+;CartTypeExpess64        = 09  ;Express 64 KB cartridge
+;CartTypeDiamond64       = 10  ;Diamond 64 KB cartridge
+;CartTypeSpartaDos64     = 11  ;SpartaDos X 64 KB cartridge
+;CartTypeXEGS032         = 12  ;*** XEGS 32 KB cartridge ***   $A000-$BFFF Constant; 4 @ $8000-$9FFF 
+;CartTypeXEGS064         = 13  ;*** XEGS 64 KB cartridge ***   $A000-$BFFF Constant; 8 @ $8000-$9FFF
+;CartTypeXEGS128         = 14  ;*** XEGS 128 KB cartridge ***  $A000-$BFFF Constant; 16 @ $8000-$9FFF
+;CartTypeOSSM16K         = 15	 ;OSS 'M091' 16 KB cartridge
+;CartType520016K         = 16  ;16K 5200 Cartridge 1 Chip ;$8000-$BFFF. (Same as 16K Cartridge)
+;CartTypeAtrax128K       = 17  ;128K	Atrax 128 KB cartridge     16 banks mapped to $A000-$BFFF. 4 lowest bits from $D5xx
+;CartTypeBOB40K          = 18  ;40K Bounty Bob Strikes Back
+;CartType52008K          = 19	;Standard 8 KB 5200 cartridge
+;CartType52004K          = 20  ;Standard 4 KB 5200 cartridge
+;CartType800Right8K      = 21  ;8 KB Right cartridge
+;CartTypeWilliams32      = 22  ;*** Williams 32K Cartridge ***  4 banks mapped to $A000-$BFFF.  
+;CartTypeXEGS256         = 23  ;*** XEGS 256 KB cartridge ***   $A000-$BFFF Constant; 32 @ $8000-$9FFF 
+;CartTypeXEGS512         = 24  ;*** XEGS 512 KB cartridge ***   $A000-$BFFF Constant; 64 @ $8000-$9FFF
+;CartTypeXEGS1024        = 25  ;*** XEGS 1024 KB cartridge ***  $A000-$BFFF Constant; 128 @ $8000-$9FFF
+;CartridgeMegaCart16K    = 26  ;Switchable 16K Mega Cartridge   
+;CartridgeMegaCart32K    = 27  ;Switchable 32K Mega Cartridge   $8000-$BFFF  2  Banks  D5xx Selects
+;CartridgeMegaCart64K    = 28  ;Switchable 64K Mega Cartridge   $8000-$BFFF  4  Banks  D5xx Selects
+;CartridgeMegaCart128K   = 29  ;Switchable 128K Mega Cartridge  $8000-$BFFF  8  Banks  D5xx Selects
+;CartridgeMegaCart256K   = 30  ;Switchable 256K Mega Cartridge  $8000-$BFFF  16 Banks  D5xx Selects
+;CartridgeMegaCart512K   = 31  ;Switchable 512K Mega Cartridge  $8000-$BFFF  32 Banks  D5xx Selects
+;CartridgeMegaCart1024K  = 32  ;Switchable 1024K Mega Cartridge $8000-$BFFF  64 Banks  D5xx Selects
+;CartTypeSXEGS032        = 33  ;Switchable XEGS 32 KB cartridge    $A000-$BFFF Constant; 4 @ $8000-$9FFF    bit 7 (+128) Disables the cartridge
+;CartTypeSXEGS064        = 34  ;Switchable XEGS 64 KB cartridge    $A000-$BFFF Constant; 8 @ $8000-$9FFF    bit 7 (+128) Disables the cartridge
+;CartTypeSXEGS128        = 35  ;Switchable XEGS 128 KB cartridge   $A000-$BFFF Constant; 16 @ $8000-$9FFF   bit 7 (+128) Disables the cartridge
+;CartTypeSXEGS256        = 36  ;Switchable XEGS 256 KB cartridge   $A000-$BFFF Constant; 32 @ $8000-$9FFF   bit 7 (+128) Disables the cartridge
+;CartTypeSXEGS512        = 37  ;Switchable XEGS 512 KB cartridge   $A000-$BFFF Constant; 64 @ $8000-$9FFF   bit 7 (+128) Disables the cartridge
+;CartTypeSXEGS1024       = 38  ;Switchable XEGS 1024 KB cartridge  $A000-$BFFF Constant; 128 @ $8000-$9FFF  bit 7 (+128) Disables the cartridge
+;CartridgePhoenix8K      = 39  ;Phoenix 08K Cartridge
+;CartridgeBlizzard16K    = 40  ;Blizzard 16K Cartridge
+;CartTypeMax128          = 41  ;Atarimax 128 KB flash cartridg ;  16 banks mapped to $A000-$BFFF.
+;CartTypeMax1024         = 42  ;Atarimax 1024 KB flash cartridg;  128 banks mapped to $A000-$BFFF.
+;CartTypeSIC128          = 128 ;SIC! Flash Cartridge 128k      $8000-$BFFF  8  Banks  D500 to $D51F Selects. Bit 5(+32)=0 $8000-$9FFF disabled. Bit 6(+64)=0 $A000-$9BFF disabled. Bit 7 (+128)=8 Write Enable
+;CartTypeSIC256          = 130 ;SIC! Flash Cartridge 256k      $8000-$BFFF  16 Banks  D500 to $D51F Selects. Bit 5(+32)=0 $8000-$9FFF disabled. Bit 6(+64)=0 $A000-$9BFF disabled. Bit 7 (+128)=8 Write Enable
+;CartTypeSIC512          = 132 ;SIC! Flash Cartridge 512k      $8000-$BFFF  32 Banks  D500 to $D51F Selects. Bit 5(+32)=0 $8000-$9FFF disabled. Bit 6(+64)=0 $A000-$9BFF disabled. Bit 7 (+128)=8 Write Enable
+;CartridgeComp16K        = 198
+;CartridgeXEXDEMO        = 199
+CartridgeType = CartridgeXEX
+      IFT CartridgeXEX
+screen_game				      equ $a000
+pmg						          equ $b000
+screen_predmetova_cara	equ pmg+64
+font_backup				      equ pmg+$100
+dlist_backup			      equ $8aa0
+      ELI CartridgeType = CartridgeComp16K
+screen_game				      equ $0800
+pmg						          equ $0C00
+screen_predmetova_cara	equ pmg+64
+font_backup				      equ pmg+$100
+dlist_backup			      equ $0780
+      ELI CartridgeType = CartridgeStandard16K||CartridgeType = CartridgeMegaCart16K 
+screen_game				      equ $0800
+pmg						          equ $0C00
+screen_predmetova_cara	equ pmg+64
+font_backup				      equ pmg+$100
+dlist_ram               equ $0700
+dlist_backup			      equ $0780
+RMT_PLAY_PLAY_FROM      equ $1C00
+      ELI CartridgeType = CartType520032K                                           
+screen_game				      equ $0800
+pmg						          equ $0C00
+screen_predmetova_cara	equ pmg+64
+font_backup				      equ pmg+$100
+dlist_ram               equ $0700
+dlist_backup			      equ $0780
+RMT_PLAY_PLAY_FROM      equ $1C00
+      EIF
+
+
+vertikalnik		equ $80
+horizontalnik	equ $81
+citanka			  equ $82 ; konstanta pro posuv
+indexos			  equ $83 ; counter pro vypis panaka
+animator		  equ $84 ; cislo animace pri pohybu panaka
+panak_x			  equ $85 ; x-ova pozice panaka
+panak_y			  equ $86 ; y-ova pozice panaka
+krokus			  equ $87 ; pocet kroku, ktere panak udelal
+combo			    equ $88 ; pocet ovoce sebraneho behem jedne chuze
+kytkos			  equ $89 ; udava pocet kytek nasazenych do jednoho radku
+level			    equ	$8a ; level :)
+counter			  equ $8b ; pocitadlo pri sazeni ovoce
+sprejus			  equ $8c ; pocet spreju
+lives			    equ $8d ; pocet zivotu, co jineho
+mavatko			  equ $8e ; index animace pri mavani rukou
+mavac			    equ $8f ; timer pro animaci mavani rukou
+cekator			  equ $90 ; counter pri prepocitavani comba
+blikator		  equ $91 ; counter pro zobrazeni blikani ikonky (DLI!)
+pionyr			  equ $92 ; counter pro rychlost efektu odlesku na truhle (jo, mohl jsem to nazvat jiskra, aby to ladilo s wordem jiskros, ale pionyr mi prislo vyrazne vtipnejsi)
+odleskus		  equ $93 ; cislo animace odlesku na truhle (DLI!)
+rmt_flag		  equ $94 ; 0 = nehrajeme, 1 = hrajeme
+ntsc			    equ $95 ; timer pro hrani pod NTSC systemem
+rmt_efekt		  equ $96 ; cislo instrumentu pro RMT
+obtiznost		  equ $97 ; 0 = easy, 1 = normal, 2 = hard
+rychlost		  equ $98 ; 0 = fast, 1 = normal
+pisnickar		  equ $99 ; 1 = ingame hudba 1, 2 = ingame hudba 2, 3 = inamge hudba 3
+stitus			  equ $9a ; 0 = nemuzu chodit pres kytky, 1 = muzu chodit pres kytky
+levak			    equ $9b ; levy index predmetove cary
+pravak			  equ $9c ; pravy index predmetove cary
+rmt_efekt2		equ $9d ; cislo instrumentu pro RMT (kdyz nehraje hudba, tak nektere sfx poustim do dalsiho kanalu)
+rmt_mode		  equ $9e ; 0 = sfx+msx ; 1 = pouze sfx
+lahvus			  equ $9f ; 0 = normalni smery joysticku, 1 = otocene smery joysticku
+radek			    equ $a0 ; Petova y-ova pozice
+sloupec			  equ $a1 ; Petova x-ova pozice
+stopnik			  equ $a2 ; flag, zda jsem prosel teleportem
+prehazovak		equ $a3 ; kdy ma na zaklade obtiznosti dojit ke zvyseni zarustani levelu (jednou za 4 pro easy, dvakrat za 7 pro normal, jednou za tri pro hard)
+
+zapisnik		  equ $d0
+zapisnik2		  equ $d2
+taken_lo		  equ $d4 ; celkovy pocet sebraneho ovoce LO
+taken_hi		  equ $d5 ; celkovy pocet sebraneho ovoce HI
+steps_lo		  equ $d6 ; kolik kroku muzeme udelat LO
+steps_hi		  equ $d7 ; kolik kroku muzeme udelat HI
+jiskros			  equ $d8 ; word counter pro cekani na spusteni odlesku na truhle
+
+; od $e0 jsou RMT promenne
+
+; konstanty
+
+pmg_vrsek		     equ $1e ; PMG souradnice panaka (panak_y), kdy je panak na prvnim radku obrazovky
+pmg_bok			     equ $40 ; PMG souradnice panaka (panak_x), kdy je panak na prvnim sloupci obrazovky
+truhla_zavrena	 equ $b0
+truhla_otevrena	 equ $bc
+    IFT CartridgeXEX
+		    org $2000	
+init_blok
+    		lda $d40b
+    		bne init_blok
+    		lda #0
+    		sta 559
+    		sta $d400
+    		lda #$ff
+    		sta $d301
+    		sta 580
+    		rts		
+    		ini init_blok
+    EIF
+    IFT CartridgeXEX
+		    org $0400
+status_bar_font
+		    ins 'frpete.fnt'
+font_game
+		    ins 'ovoce.fnt'
+    ELI CartridgeType = CartridgeComp16K
+        ORG $1000
+        OPT H-F+
+status_bar_font
+		    ins 'frpete.fnt'
+font_game
+		    ins 'ovoce.fnt'
+        ORG $1800   
+    ELI CartridgeType = CartType520032K||CartridgeType = CartridgeStandard16K||CartridgeType = CartridgeMegaCart16K      
+status_bar_font = $1000
+font_game = $1400
+    EIF
+		IFT CartridgeType = CartType520032K
+      ORG $4000
+    ELI CartridgeType = CartridgeStandard16K||CartridgeType = CartridgeMegaCart16K
+      ORG $4000
+    EIF
+    IFT CartridgeXEX
+dlist_game
+  		dta $0,$60,$30
+  		dta 64+4+32+16
+dlist_game_radek1  ; 1
+  		.word screen_game
+  		dta 64+4+32+16
+dlist_game_radek2	
+  		.word screen_game+$40
+  		dta 64+4+32+16
+dlist_game_radek3 ; 2		
+  		.word screen_game+2*$40
+  		dta 64+4+32+16
+dlist_game_radek4		
+  		.word screen_game+3*$40
+  		dta 64+4+32+16
+dlist_game_radek5	; 3	
+  		.word screen_game+4*$40
+  		dta 64+4+32+16
+dlist_game_radek6		
+  		.word screen_game+5*$40
+  		dta 64+4+32+16
+dlist_game_radek7	;4	
+  		.word screen_game+6*$40
+  		dta 64+4+32+16+128
+dlist_game_radek8		
+  		.word screen_game+7*$40
+  		dta 64+4+32+16
+dlist_game_radek9	; 5	
+  		.word screen_game+8*$40
+  		dta 64+4+32+16
+dlist_game_radek10		
+  		.word screen_game+9*$40
+  		dta 64+4+32+16
+dlist_game_radek11 ; 6
+  		.word screen_game+10*$40
+  		dta 64+4+32+16
+dlist_game_radek12		
+  		.word screen_game+11*$40
+  		dta 64+4+32+16
+dlist_game_radek13	; 7	
+  		.word screen_game+12*$40
+  		dta 64+4+32+16
+dlist_game_radek14		
+  		.word screen_game+13*$40
+  		dta 64+4+32+16
+dlist_game_radek15		
+  		.word screen_game+14*$40
+  		dta 64+4+32+16
+dlist_game_radek16		
+  		.word screen_game+15*$40
+  		dta 64+4+32+16
+dlist_game_radek17		
+  		.word screen_game+16*$40
+  		dta 64+4+32+16
+dlist_game_radek18		
+  		.word screen_game+17*$40
+  		dta 64+4+32+16
+dlist_game_radek19		
+  		.word screen_game+18*$40
+  		dta 64+4+32+16
+dlist_game_radek20		
+  		.word screen_game+19*$40
+  		dta 64+4+32+16
+dlist_game_radek21		
+  		.word screen_game+20*$40
+  		dta 64+4+32+16
+dlist_game_radek22		
+  		.word screen_game+21*$40
+  		dta 64+4+32+16
+dlist_game_radek23		
+  		.word screen_game+22*$40
+  		dta 64+4+32+16
+dlist_game_radek24
+  		.word screen_game+23*$40	
+  		dta 64+4+16
+dlist_game_radek25		
+  		.word screen_game+24*$40
+  		dta 0
+  		dta 0+128		
+  		dta 64+$0d
+  		.word screen_predmetova_cara
+  		dta $10
+  		dta 64+15
+  		.word pmg
+  		dta 15
+  		dta 64+2+16
+dlist_game_status_bar
+  		.word status_bar
+  		dta 64+15
+  		.word pmg
+  		dta 64+2+16
+  		.word status_bar+40
+  		dta 64+15+128
+  		.word pmg
+  		dta 65
+  		.word dlist_game
+		ELI CartridgeType = CartridgeComp16K||CartridgeType = CartType520032K||CartridgeType = CartridgeStandard16K||CartridgeType = CartridgeMegaCart16K
+dlist_game = dlist_ram             
+    EIF
+dlist_congratulations
+  		dta $30
+  		:8 dta $70
+  		dta 64+4
+  		.word screen_game
+  		dta 4
+  		dta $70
+  		dta $70,$70
+  		dta 64+4+16
+  		.word screen_game+12*$40
+  		dta 64+4+16
+  		.word screen_game+13*$40
+  		dta $70+128
+  		:5 dta $70		
+  		dta 64+2
+  		.word screen_game+$40
+  		dta $10
+  		dta 2+16
+  		dta 65
+  		.word dlist_congratulations
+		
+dlist_title
+  		dta $70,$70
+  		dta 64+14		
+  		.word screen_game
+  		:15 dta 14
+  		dta 14+128
+  		:23 dta 14
+  		dta 14+128
+  		:5 dta 14
+  		dta 14+128
+  		:5 dta 14
+  		dta 14+128
+  		:5 dta 14
+  		dta 14+128
+  		:8 dta 14
+  		dta 0+128,$60,$70
+  		dta 64+2
+  		.word title_screen		
+  		dta $10,2,$10,2
+  		dta $70,$70,$70,$70+128
+  		dta 2,$30,6
+  		dta $70,$70,$70,$70+128
+  		dta 2+16,$10,2+16
+  		dta 65
+  		.word dlist_title
+    EIF		
+totalni_start
+		lda #0
+		sta ntsc
+		sta rmt_flag
+		sta rmt_mode
+		sta obtiznost
+		lda #$ff
+		sta rmt_efekt
+		sta rmt_efekt2
+		
+		;ldy #<main_vbi
+		;ldx #>main_vbi
+		;lda #7
+		;jsr $e45c
+		
+		lda #$c0
+		sta $d40e
+
+		ldx #0
+zkopiruj_backup_fontu
+		lda font_game,x
+		sta font_backup,x
+		lda font_game+256,x
+		sta font_backup+256,x
+		inx
+		bne zkopiruj_backup_fontu		
+		
+		ldx #$4d
+vyzalohuj_dlist_game
+		lda dlist_game,x
+		sta dlist_backup,x
+		dex
+		bpl vyzalohuj_dlist_game
+		
+navrat_do_title
+		ldx #$4d
+vrat_prosim_dlist_game_ze_zalohy
+		lda dlist_backup,x
+		sta dlist_game,x		
+		dex
+		bpl vrat_prosim_dlist_game_ze_zalohy
+
+		lda #2
+		sta $d404
+		
+		lda #>status_bar_font
+		sta 756
+		
+		lda #<dlist_title
+		sta 560
+		lda #>dlist_title
+		sta 561
+		
+		lda #<dli_title_1
+		sta 512
+		lda #>dli_title_1
+		sta 513
+		
+		jsr smaz_game_screen
+		jsr smaz_pmg
+		
+		lda #<logo_data
+		sta zapisnik
+		lda #>logo_data
+		sta zapisnik+1	
+		
+		lda #<(screen_game+8)
+		sta zapisnik2
+		lda #>(screen_game+8)
+		sta zapisnik2+1
+		
+		ldx #66
+zkopiruj_logo_do_screen_memory
+		ldy #15
+zkopiruj_jeden_radek_loga_do_screen_memory
+		lda (zapisnik),y
+		sta (zapisnik2),y
+		dey
+		bpl zkopiruj_jeden_radek_loga_do_screen_memory
+		
+		lda zapisnik
+		clc
+		adc #16
+		sta zapisnik
+		lda zapisnik+1
+		adc #0
+		sta zapisnik+1
+		
+		lda zapisnik2
+		clc
+		adc #32
+		sta zapisnik2
+		lda zapisnik2+1
+		adc #0
+		sta zapisnik2+1
+		dex
+		bpl zkopiruj_logo_do_screen_memory
+		
+		jsr verze_1_1_do_screenu
+		
+		lda #$ba
+		sta 708
+		lda #$34
+		sta 709		
+		lda #$3c
+		sta 710
+		lda #$e0
+		sta 712
+		
+		lda #>pmg
+		sta $d407		
+		lda #3
+		sta $d01d		
+		
+		lda #0 ; barvy panaka
+		sta $d001
+		sta $d002
+		sta $d003
+		sta 705
+		sta prichod_panaka_dokoncen+1 ; flag pro dokonceni prichodu panaka
+		lda #$3a
+		sta 706
+		lda #$84
+		sta 707
+		
+		lda #$40 ; equalizer 1
+		sta $d000
+		lda #$8a
+		sta 704
+		
+		lda #$ff
+		sta $d00c ; SIZEM
+		lda #$aa+5 ; equalizer 5
+		sta $d004
+		lda #$aa+5+5 ; equalizer 6
+		sta $d005
+		
+		lda #1+32
+		sta 623
+		
+		lda #90
+		sta panak_y
+		lda #6
+		sta panak_x
+		
+		ldx #<rmt_title
+		ldy #>rmt_title
+		lda #0
+		jsr rmt_player_stereo
+		
+		lda #61
+		sta 559
+		sta rmt_flag
+		
+		lda #7
+		sta animator
+title_loop	
+		lda $d010
+		beq pust_hru_prosim
+		lda $d01f
+		cmp #6
+		beq pust_hru_prosim
+		cmp #5
+		beq macka_select_v_title
+		lda selecton
+		beq title_loop
+		dec selecton
+		jmp title_loop		
+macka_select_v_title		
+		lda selecton
+		bne title_loop
+		ldx obtiznost
+		cpx #2
+		bne obtiznost_neni_na_hard
+		ldx #$ff
+obtiznost_neni_na_hard
+		inx
+		stx obtiznost
+		ldy obtiznost_indexy,x
+		ldx #5
+vypis_obtiznost
+		lda obtiznost_napisy,y
+		sta title_screen+133,x
+		iny
+		dex
+		bpl vypis_obtiznost
+cekej_na_pusteni_funknich_klaves
+		lda $d01f
+		cmp #7
+		bne cekej_na_pusteni_funknich_klaves
+		lda #3
+		sta selecton
+		bne title_loop
+		
+pust_hru_prosim
+		lda $d40b
+		bne pust_hru_prosim
+		
+		lda #0
+		sta 559
+		sta $d400
+		sta rmt_flag		
+		jsr rmt_player_stereo+9 ; ticho	
+		
+		ldx obtiznost
+		lda prehazovak_indexy,x
+		sta prehazovak
+		
+		lda #1
+		sta pisnickar
+
+		lda #<dlist_game
+		sta 560
+		lda #>dlist_game
+		sta 561
+		lda #>font_game
+		sta 756		
+			
+		jsr nastav_vsechny_barvy_na_e0
+		
+		lda #0
+		sta vertikalnik
+		sta horizontalnik
+		sta blikator ; nutne!		
+		sta jiskros
+		sta jiskros+1		
+		sta $d404
+		sta $d405
+		sta muj_d404+1		
+		lda #5
+		sta odleskus
+		lda #10
+		sta pionyr		
+		
+		lda #104
+		sta panak_x
+		sta $d001
+		sta muj_d001+1
+		sta $d002
+		sta muj_d002+1
+		sta $d003
+		sta muj_d003+1
+		lda #114
+		sta panak_y		
+
+		ldx #0
+zkopiruj_font_ze_zalohy
+		lda font_backup,x
+		sta font_game,x
+		lda font_backup+256,x
+		sta font_game+256,x
+		inx
+		bne zkopiruj_font_ze_zalohy
+
+		lda #3
+		sta sprejus
+		sta lives
+		
+		lda #19
+		sta kytkos ; pocatecni pocet kytek nasazenych do jednoho radku		
+		
+		lda #$50 ; decimalni cislo
+		sta steps_lo		
+		lda #0
+		sta steps_hi
+		sta level
+		;lda #1
+		sta nastav_taken_lo+1
+		
+		;lda #$99
+		;sta level
+		
+		lda #1
+		;lda #0
+		sta nastav_taken_hi+1		
+		
+		lda #<dli_game_1
+		sta 512
+		lda #>dli_game_1
+		sta 513				
+		
+		jsr smaz_pmg
+		
+new_level
+		jsr smaz_game_screen
+		jsr smaz_predmetovou_caru
+		jsr nahod_normalni_smery_joysticku	
+		
+		ldx #$3e
+zapis_vodorovne_zdi		
+		lda #1
+		sta screen_game,x
+		sta screen_game+$40,x
+		sta screen_game+48*$40,x
+		sta screen_game+49*$40,x		
+		lda #2
+		sta screen_game+1,x
+		sta screen_game+1+$40,x
+		sta screen_game+1+48*$40,x
+		sta screen_game+1+49*$40,x
+		dex
+		dex
+		bpl zapis_vodorovne_zdi
+		
+		lda #<screen_game+4+2*$40
+		sta zapisnik
+		lda #>screen_game+4+2*$40
+		sta zapisnik+1
+		lda #<screen_game+4+$3a+2*$40		
+		sta zapisnik2
+		lda #>screen_game+4+$3a+2*$40
+		sta zapisnik2+1
+		
+		ldx #45
+zapis_svisle_zdi
+		lda #1
+		ldy #0
+		sta (zapisnik),y
+		sta (zapisnik2),y
+		iny
+		lda #2
+		sta (zapisnik),y
+		sta (zapisnik2),y
+		lda zapisnik
+		clc
+		adc #$40
+		sta zapisnik
+		lda zapisnik+1
+		adc #0
+		sta zapisnik+1
+		lda zapisnik2
+		clc
+		adc #$40
+		sta zapisnik2
+		lda zapisnik2+1
+		adc #0
+		sta zapisnik2+1
+		dex
+		bpl zapis_svisle_zdi
+		
+		jsr nasad_ovoce_do_screenu
+		
+nastav_taken_lo
+		lda #0 ; pocet ovoce k sebrani LO
+		sta taken_lo
+nastav_taken_hi
+		lda #$01 ; pocet ovoce k sebrani LO
+		sta taken_hi
+		
+pokracuj_po_ztrate_zivota
+		lda #1+32
+		sta 623		
+		
+		lda #0 ; barvy panaka
+		sta 705
+		sta rmt_flag
+		sta stitus ; zadny stit
+		sta rychlost ; fast rychlost
+		sta lahvus ; normalni smery joysticku
+		lda #$3a
+		sta 706
+		lda #$84
+		sta 707		
+		
+		ldx #40
+		jsr big_wait
+		
+		jsr vypis_steps
+		jsr vypis_taken		
+		jsr vypis_combo
+		jsr vypis_spreje
+		jsr vypis_lives
+		
+		lda level
+		and #$0f
+		clc
+		adc #$10
+		sta status_bar+28
+		lda level
+		lsr @
+		lsr @
+		lsr @
+		lsr @
+		clc
+		adc #$10
+		sta status_bar+27		
+		
+		lda rmt_mode ; ma hrat ingame hudba?
+		beq pust_ingame_hudbu
+		lda #$0d ; sfx nabidneme z tracku 1, on to stejne nepozna a kdyz da nahodit hudbu + sfx, tak se vzdy pusti prislusny track s A=0
+		ldx #<rmt_track_1
+		ldy #>rmt_track_1
+		bne ingame_hudba_vyresena
+pust_ingame_hudbu ; 1c38
+		ldx pisnickar	
+		lda ingame_hudby_rychlosti,x
+		sta rychlost_rmt_hrani+1
+		lda ingame_hudby_pointery_lo,x		
+		ldy ingame_hudby_pointery_hi,x
+		tax
+		lda #0
+ingame_hudba_vyresena
+		jsr rmt_player		
+		
+		jsr vykresli_pripraveneho_sviste	
+		jsr vykresli_pmg_do_status_baru
+		
+		lda #61		
+		sta 559
+		
+		ldx #40
+		jsr big_wait		
+		
+		jsr zapis_barvy_levelu
+		
+		lda #$ff ; timer pro mavani rukou
+		sta mavac
+		sta animator
+		sta 764
+		sta rmt_flag
+		lda #11
+		sta mavatko
+		
+main_loop		
+		lda 764
+		cmp #$ff
+		beq nemacka_zadnou_klavesu		
+		ldy #$ff
+		sty 764
+		cmp #$1c
+		bne nechce_navrat_zpet_do_title
+		lda #1
+		sta lives
+		jsr vykresli_horiciho_sviste
+		ldx #10
+		jsr big_wait
+		jmp cekej_pred_skokem_do_title
+nechce_navrat_zpet_do_title		
+		cmp #$0c
+		beq game_over_man_game_over
+nemacka_zadnou_klavesu		
+		lda 644
+		bne nechce_akci_sprej
+		jsr akce_sprej		
+		jmp main_loop
+nechce_akci_sprej
+		lda 632
+		cmp #15
+		bne sahnul_na_joystick
+		jsr vykresli_mavajiciho_sviste
+		jmp main_loop
+sahnul_na_joystick
+		cmp #11
+		bne nechce_panakem_doleva
+		jsr pohyb_panaka_doleva
+		jmp prepocitej_steps
+nechce_panakem_doleva
+		cmp #7
+		bne nechce_panakem_doprava		
+		jsr pohyb_panaka_doprava
+		jmp prepocitej_steps
+nechce_panakem_doprava
+		cmp #13
+		bne nechce_panakem_dolu
+		jsr pohyb_panaka_dolu
+		jmp prepocitej_steps
+nechce_panakem_dolu
+		cmp #14
+		bne nechce_panakem_nahoru
+		jsr pohyb_panaka_nahoru
+		jmp prepocitej_steps
+nechce_panakem_nahoru
+		lda mavatko
+		cmp #11
+		beq mavatko_nebylo_rozjete_pri_pohybu
+		jsr vykresli_pripraveneho_sviste
+mavatko_nebylo_rozjete_pri_pohybu
+		lda #$ff
+		sta mavac
+		lda #11
+		sta mavatko		
+		bne main_loop
+prepocitej_steps
+		lda #$ff
+		sta mavac
+		lda taken_lo
+		ora taken_hi
+		beq hura_level_completed
+		
+		jsr pripocti_combo_kroky
+		lda steps_lo
+		ora steps_hi
+		beq game_over_man_game_over
+		jmp main_loop
+game_over_man_game_over
+		jsr vykresli_horiciho_sviste
+		lda lives
+		beq tak_a_to_je_konec_dnesniho_programu
+		jsr smaz_predmetovou_caru
+		jsr nahod_normalni_smery_joysticku
+		jmp pokracuj_po_ztrate_zivota
+tak_a_to_je_konec_dnesniho_programu
+		jsr vypis_game_over
+cekej_pred_skokem_do_title
+		lda $d40b
+		bne cekej_pred_skokem_do_title
+		lda #0
+		sta 559
+		sta $d400		
+		sta rmt_flag
+		jmp navrat_do_title
+hura_level_completed
+		sta stitus
+		
+		ldx #<rmt_track_1 ; je jedno, ze pustim vzdy prvni track pri viteznem svistovi, hudba u toho stejne nehraje
+		ldy #>rmt_track_1
+		lda #$0d ; pouze sfx
+		jsr rmt_player		
+		
+		lda #$20
+		sta rmt_efekt
+
+		jsr vykresli_vitezneho_sviste
+		
+		jsr pripocti_combo_kroky
+		ldx #40
+		jsr big_wait
+		jsr nastav_vsechny_barvy_na_e0
+		
+		lda level
+		cmp #$99
+		bne nedosahnul_levelu_99
+		jsr zaverecna_vtipna_akce_pri_zkompletovani_levelu_99
+		jmp cekej_pred_skokem_do_title
+nedosahnul_levelu_99
+		inc pisnickar
+		lda pisnickar
+		and #3
+		bne pisnickar_neni_nulovy
+		lda #1
+pisnickar_neni_nulovy
+		sta pisnickar		
+		sed
+		lda level
+		clc
+		adc #$01
+		sta level
+		and #$0f ; nizsi cifra levelu
+		bne nemame_tu_zvyseni_taken
+		
+		ldx obtiznost ; easy = +5, normal = +10, hard = +15
+		lda nastav_taken_lo+1 ; pocet ovoce k sebrani se zvysuje v levelech 10, 20, 30, 40, 50, 60, 70, 80 a 90
+		clc
+		adc obtiznost_taken,x
+		sta nastav_taken_lo+1
+		lda nastav_taken_hi+1
+		adc #0
+		sta nastav_taken_hi+1
+		
+nemame_tu_zvyseni_taken
+		dec prehazovak
+		lda obtiznost
+		lsr @
+		bcc toto_neni_normal_obtiznost
+		lda prehazovak ; na normal zvysujeme kytkose dvakrat za sedm levelu
+		beq zvys_kytkos_a_resetuj_prehazovak
+		cmp #3
+		beq zvys_kytkos_a_NEresetuj_prehazovak
+		bne zvyseni_kytkose_vyresenose
+toto_neni_normal_obtiznost
+		lda prehazovak ; na easy a hard zvysujeme kytkose jednou za ctyri na easy a jednou za tri na hard
+		bne zvyseni_kytkose_vyresenose
+zvys_kytkos_a_resetuj_prehazovak
+		ldx obtiznost
+		lda prehazovak_indexy,x
+		sta prehazovak
+zvys_kytkos_a_NEresetuj_prehazovak		
+		inc kytkos
+zvyseni_kytkose_vyresenose ; toto je madarsky
+		
+		lda sprejus
+		clc
+		adc #1
+		sta sprejus
+		cld
+		jmp new_level
+				
+wait	
+		lda 20
+waituj
+		cmp 20
+		beq waituj
+		rts
+		
+smaz_pmg
+		lda #0
+		tax
+mazej_pmg
+		sta pmg,x
+		sta pmg+$300,x
+		sta pmg+$400,x
+		sta pmg+$500,x
+		sta pmg+$600,x
+		sta pmg+$700,x
+		inx
+		bne mazej_pmg
+		rts
+		
+obraz_dolu
+		lda dlist_game_radek1
+		clc
+		adc citanka
+		sta dlist_game_radek1
+		lda dlist_game_radek1+1
+		adc #0
+		sta dlist_game_radek1+1
+		
+		lda dlist_game_radek2
+		clc
+		adc citanka
+		sta dlist_game_radek2
+		lda dlist_game_radek2+1
+		adc #0
+		sta dlist_game_radek2+1
+		
+		lda dlist_game_radek3
+		clc
+		adc citanka
+		sta dlist_game_radek3
+		lda dlist_game_radek3+1
+		adc #0
+		sta dlist_game_radek3+1
+		
+		lda dlist_game_radek4
+		clc
+		adc citanka
+		sta dlist_game_radek4
+		lda dlist_game_radek4+1
+		adc #0
+		sta dlist_game_radek4+1
+		
+		lda dlist_game_radek5
+		clc
+		adc citanka
+		sta dlist_game_radek5
+		lda dlist_game_radek5+1
+		adc #0
+		sta dlist_game_radek5+1
+		
+		lda dlist_game_radek6
+		clc
+		adc citanka
+		sta dlist_game_radek6
+		lda dlist_game_radek6+1
+		adc #0
+		sta dlist_game_radek6+1		
+		
+		lda dlist_game_radek7
+		clc
+		adc citanka
+		sta dlist_game_radek7
+		lda dlist_game_radek7+1
+		adc #0
+		sta dlist_game_radek7+1
+		
+		lda dlist_game_radek8
+		clc
+		adc citanka
+		sta dlist_game_radek8
+		lda dlist_game_radek8+1
+		adc #0
+		sta dlist_game_radek8+1
+		
+		lda dlist_game_radek9
+		clc
+		adc citanka
+		sta dlist_game_radek9
+		lda dlist_game_radek9+1
+		adc #0
+		sta dlist_game_radek9+1
+		
+		lda dlist_game_radek10
+		clc
+		adc citanka
+		sta dlist_game_radek10
+		lda dlist_game_radek10+1
+		adc #0
+		sta dlist_game_radek10+1
+		
+		lda dlist_game_radek11
+		clc
+		adc citanka
+		sta dlist_game_radek11
+		lda dlist_game_radek11+1
+		adc #0
+		sta dlist_game_radek11+1
+		
+		lda dlist_game_radek12
+		clc
+		adc citanka
+		sta dlist_game_radek12
+		lda dlist_game_radek12+1
+		adc #0
+		sta dlist_game_radek12+1
+		
+		lda dlist_game_radek13
+		clc
+		adc citanka
+		sta dlist_game_radek13
+		lda dlist_game_radek13+1
+		adc #0
+		sta dlist_game_radek13+1
+		
+		lda dlist_game_radek14
+		clc
+		adc citanka
+		sta dlist_game_radek14
+		lda dlist_game_radek14+1
+		adc #0
+		sta dlist_game_radek14+1
+		
+		lda dlist_game_radek15
+		clc
+		adc citanka
+		sta dlist_game_radek15
+		lda dlist_game_radek15+1
+		adc #0
+		sta dlist_game_radek15+1
+		
+		lda dlist_game_radek16
+		clc
+		adc citanka
+		sta dlist_game_radek16
+		lda dlist_game_radek16+1
+		adc #0
+		sta dlist_game_radek16+1
+		
+		lda dlist_game_radek17
+		clc
+		adc citanka
+		sta dlist_game_radek17
+		lda dlist_game_radek17+1
+		adc #0
+		sta dlist_game_radek17+1
+		
+		lda dlist_game_radek18
+		clc
+		adc citanka
+		sta dlist_game_radek18
+		lda dlist_game_radek18+1
+		adc #0
+		sta dlist_game_radek18+1
+		
+		lda dlist_game_radek19
+		clc
+		adc citanka
+		sta dlist_game_radek19
+		lda dlist_game_radek19+1
+		adc #0
+		sta dlist_game_radek19+1
+		
+		lda dlist_game_radek20
+		clc
+		adc citanka
+		sta dlist_game_radek20
+		lda dlist_game_radek20+1
+		adc #0
+		sta dlist_game_radek20+1
+		
+		lda dlist_game_radek21
+		clc
+		adc citanka
+		sta dlist_game_radek21
+		lda dlist_game_radek21+1
+		adc #0
+		sta dlist_game_radek21+1
+		
+		lda dlist_game_radek22
+		clc
+		adc citanka
+		sta dlist_game_radek22
+		lda dlist_game_radek22+1
+		adc #0
+		sta dlist_game_radek22+1
+		
+		lda dlist_game_radek23
+		clc
+		adc citanka
+		sta dlist_game_radek23
+		lda dlist_game_radek23+1
+		adc #0
+		sta dlist_game_radek23+1
+		
+		lda dlist_game_radek24
+		clc
+		adc citanka
+		sta dlist_game_radek24
+		lda dlist_game_radek24+1
+		adc #0
+		sta dlist_game_radek24+1
+		
+		lda dlist_game_radek25
+		clc
+		adc citanka
+		sta dlist_game_radek25
+		lda dlist_game_radek25+1
+		adc #0
+		sta dlist_game_radek25+1
+		
+		rts
+		
+obraz_nahoru
+		lda dlist_game_radek1
+		sec
+		sbc citanka
+		sta dlist_game_radek1
+		lda dlist_game_radek1+1
+		sbc #0
+		sta dlist_game_radek1+1
+		
+		lda dlist_game_radek2
+		sec
+		sbc citanka
+		sta dlist_game_radek2
+		lda dlist_game_radek2+1
+		sbc #0
+		sta dlist_game_radek2+1
+		
+		lda dlist_game_radek3
+		sec
+		sbc citanka
+		sta dlist_game_radek3
+		lda dlist_game_radek3+1
+		sbc #0
+		sta dlist_game_radek3+1
+		
+		lda dlist_game_radek4
+		sec
+		sbc citanka
+		sta dlist_game_radek4
+		lda dlist_game_radek4+1
+		sbc #0
+		sta dlist_game_radek4+1
+		
+		lda dlist_game_radek5
+		sec
+		sbc citanka
+		sta dlist_game_radek5
+		lda dlist_game_radek5+1
+		sbc #0
+		sta dlist_game_radek5+1
+		
+		lda dlist_game_radek6
+		sec
+		sbc citanka
+		sta dlist_game_radek6
+		lda dlist_game_radek6+1
+		sbc #0
+		sta dlist_game_radek6+1		
+		
+		lda dlist_game_radek7
+		sec
+		sbc citanka
+		sta dlist_game_radek7
+		lda dlist_game_radek7+1
+		sbc #0
+		sta dlist_game_radek7+1
+		
+		lda dlist_game_radek8
+		sec
+		sbc citanka
+		sta dlist_game_radek8
+		lda dlist_game_radek8+1
+		sbc #0
+		sta dlist_game_radek8+1
+		
+		lda dlist_game_radek9
+		sec
+		sbc citanka
+		sta dlist_game_radek9
+		lda dlist_game_radek9+1
+		sbc #0
+		sta dlist_game_radek9+1
+		
+		lda dlist_game_radek10
+		sec
+		sbc citanka
+		sta dlist_game_radek10
+		lda dlist_game_radek10+1
+		sbc #0
+		sta dlist_game_radek10+1
+		
+		lda dlist_game_radek11
+		sec
+		sbc citanka
+		sta dlist_game_radek11
+		lda dlist_game_radek11+1
+		sbc #0
+		sta dlist_game_radek11+1
+		
+		lda dlist_game_radek12
+		sec
+		sbc citanka
+		sta dlist_game_radek12
+		lda dlist_game_radek12+1
+		sbc #0
+		sta dlist_game_radek12+1
+		
+		lda dlist_game_radek13
+		sec
+		sbc citanka
+		sta dlist_game_radek13
+		lda dlist_game_radek13+1
+		sbc #0
+		sta dlist_game_radek13+1
+		
+		lda dlist_game_radek14
+		sec
+		sbc citanka
+		sta dlist_game_radek14
+		lda dlist_game_radek14+1
+		sbc #0
+		sta dlist_game_radek14+1
+		
+		lda dlist_game_radek15
+		sec
+		sbc citanka
+		sta dlist_game_radek15
+		lda dlist_game_radek15+1
+		sbc #0
+		sta dlist_game_radek15+1
+		
+		lda dlist_game_radek16
+		sec
+		sbc citanka
+		sta dlist_game_radek16
+		lda dlist_game_radek16+1
+		sbc #0
+		sta dlist_game_radek16+1
+		
+		lda dlist_game_radek17
+		sec
+		sbc citanka
+		sta dlist_game_radek17
+		lda dlist_game_radek17+1
+		sbc #0
+		sta dlist_game_radek17+1
+		
+		lda dlist_game_radek18
+		sec
+		sbc citanka
+		sta dlist_game_radek18
+		lda dlist_game_radek18+1
+		sbc #0
+		sta dlist_game_radek18+1
+		
+		lda dlist_game_radek19
+		sec
+		sbc citanka
+		sta dlist_game_radek19
+		lda dlist_game_radek19+1
+		sbc #0
+		sta dlist_game_radek19+1
+		
+		lda dlist_game_radek20
+		sec
+		sbc citanka
+		sta dlist_game_radek20
+		lda dlist_game_radek20+1
+		sbc #0
+		sta dlist_game_radek20+1
+		
+		lda dlist_game_radek21
+		sec
+		sbc citanka
+		sta dlist_game_radek21
+		lda dlist_game_radek21+1
+		sbc #0
+		sta dlist_game_radek21+1
+		
+		lda dlist_game_radek22
+		sec
+		sbc citanka
+		sta dlist_game_radek22
+		lda dlist_game_radek22+1
+		sbc #0
+		sta dlist_game_radek22+1
+		
+		lda dlist_game_radek23
+		sec
+		sbc citanka
+		sta dlist_game_radek23
+		lda dlist_game_radek23+1
+		sbc #0
+		sta dlist_game_radek23+1
+		
+		lda dlist_game_radek24
+		sec
+		sbc citanka
+		sta dlist_game_radek24
+		lda dlist_game_radek24+1
+		sbc #0
+		sta dlist_game_radek24+1
+		
+		lda dlist_game_radek25
+		sec
+		sbc citanka
+		sta dlist_game_radek25
+		lda dlist_game_radek25+1
+		sbc #0
+		sta dlist_game_radek25+1
+		
+		rts				
+		
+pohyb_panaka_doleva
+		lda #0
+		sta krokus ; pocet kroku, co jsem udelal
+pokracuj_v_pohybu_panaka_doleva
+		lda #$ff ; default je, ze panak muze jit doleva
+		sta levy_flag+1
+		sta levy_scrol_flag+1
+
+		jsr zjisti_pozici_panaka
+		ldy #$3f ; copak je vlevo od panaka?
+		lda (zapisnik),y
+		beq panak_muze_jit_doleva
+		cmp #truhla_zavrena ; je tam truhla?
+		beq panak_vlevo_narazil_na_truhlu		
+		cmp #truhla_otevrena
+		beq panak_vlevo_na_neco_narazil
+		cmp #2 ; je tam zed?
+		beq panak_vlevo_na_neco_narazil
+		cmp #$84 ; je tam kytka?
+		bne panak_muze_jit_doleva
+		lda stitus
+		bne panak_muze_jit_doleva		
+panak_vlevo_na_neco_narazil
+		lda #0
+		sta levy_flag+1
+		sta levy_scrol_flag+1
+		lda krokus
+		beq panak_muze_jit_doleva
+		rts
+		
+panak_vlevo_narazil_na_truhlu
+		ldx #14
+		ldy panak_y
+otoc_panaka_vlevo_k_truhle
+		lda panak_doleva_hrac_1+15,x
+		sta pmg+$500,y
+		lda panak_doleva_hrac_2+15,x
+		sta pmg+$600,y
+		lda panak_doleva_hrac_3+15,x
+		sta pmg+$700,y		
+		dey
+		dex
+		bpl otoc_panaka_vlevo_k_truhle
+
+		lda panak_x
+		sec
+		sbc #10
+		sta $d000 ; x-ova pozice PMG pokladu
+		lda panak_y
+		sec
+		sbc #9
+		sta pozice_pokladu+1 ; y-ova pozice PMG pokladu
+		ldy #$3e ; pozice v charech pro animaci truhly
+		jsr akce_truhla
+		rts		
+
+panak_muze_jit_doleva
+		inc krokus
+		lda animator
+		bpl pohybuj_panakem_doleva
+		lda #15
+		sta animator
+pohybuj_panakem_doleva
+		ldy animator
+		ldx panak_indexy_animaci_v_ose_x,y
+		
+		lda #14
+		sta indexos		
+		ldy panak_y
+kresli_panaka_pri_pohybu_doleva
+		lda panak_doleva_hrac_1,x
+		sta pmg+$500,y
+		lda panak_doleva_hrac_2,x
+		sta pmg+$600,y
+		lda panak_doleva_hrac_3,x
+		sta pmg+$700,y
+		dex
+		dey
+		dec indexos
+		bpl kresli_panaka_pri_pohybu_doleva
+		
+		lda panak_x
+		cmp #$61
+		bcs levy_flag
+		
+levy_scrol_flag
+		lda #$ff
+		beq levy_flag
+		
+		lda horizontalnik
+		beq horizontalnik_smerem_doleva_je_0		
+		cmp #3
+		bne horizontalnik_smerem_doleva_neni_3		
+		lda #0
+		sta horizontalnik
+		sta $d404
+		sta muj_d404+1
+		lda #1
+		sta citanka
+		jsr obraz_nahoru
+		jmp panak_nemuze_jit_doleva
+horizontalnik_smerem_doleva_je_0	
+		lda dlist_game_radek1 ; jsme uplne vlevo?
+		and #$1f
+		beq levy_flag
+		lda horizontalnik
+horizontalnik_smerem_doleva_neni_3
+		clc
+		adc #1
+		sta horizontalnik
+		sta $d404		
+		sta muj_d404+1
+		jmp panak_nemuze_jit_doleva
+		
+levy_flag
+		lda #$ff
+		beq panak_nemuze_jit_doleva
+		ldx panak_x
+		dex
+		stx panak_x
+		stx $d001
+		stx muj_d001+1
+		stx $d002
+		stx muj_d002+1
+		stx $d003
+		stx muj_d003+1
+		
+panak_nemuze_jit_doleva
+		ldx rychlost
+		jsr big_wait ; rychlost pohybu hrace
+		dec animator		
+		bmi konec_pohybu_panakem_doleva
+		lda animator
+		cmp #7
+		beq konec_pohybu_panakem_doleva
+		jmp pohybuj_panakem_doleva		
+konec_pohybu_panakem_doleva
+		jsr prover_sebrani_ovoce
+		beq neni_zastaveni_pri_pohybu_doleva
+		rts
+		
+neni_zastaveni_pri_pohybu_doleva		
+		lda levy_flag+1
+		beq neodecitej_kroky_doleva
+		jsr odecti_kroky
+		bne neodecitej_kroky_doleva
+		rts
+		
+neodecitej_kroky_doleva
+		lda taken_lo
+		ora taken_hi
+		bne taken_neni_nulovy_pri_pohybu_doleva
+		rts
+taken_neni_nulovy_pri_pohybu_doleva		
+		jmp pokracuj_v_pohybu_panaka_doleva
+		
+pohyb_panaka_doprava
+		lda #0
+		sta krokus ; pocet kroku, co jsem udelal
+pokracuj_v_pohybu_panaka_doprava
+		lda #$ff ; default je, ze panak muze jit doprava
+		sta pravy_flag+1
+		sta pravy_scrol_flag+1
+
+		jsr zjisti_pozici_panaka
+		ldy #$42 ; copak je vpravo od panaka?
+		lda (zapisnik),y
+		cmp #truhla_zavrena-1 ; je tam truhla?
+		beq panak_vpravo_narazil_na_truhlu
+		cmp #truhla_otevrena-1
+		beq panak_vpravo_na_neco_narazil		
+		cmp #1 ; je tam zed?
+		beq panak_vpravo_na_neco_narazil
+		cmp #$83 ; je tam kytka?
+		bne panak_muze_jit_doprava
+		lda stitus
+		bne panak_muze_jit_doprava		
+panak_vpravo_na_neco_narazil
+		lda #0
+		sta pravy_flag+1
+		sta pravy_scrol_flag+1
+		lda krokus ; tlacime do prekazky, tj. udelal jsem cestou nula kroku?
+		beq panak_muze_jit_doprava
+		rts ; tak jsme dosli, babi
+		
+panak_vpravo_narazil_na_truhlu
+		ldx #14
+		ldy panak_y
+otoc_panaka_vpravo_k_truhle
+		lda panak_doprava_hrac_1+15,x
+		sta pmg+$500,y
+		lda panak_doprava_hrac_2+15,x
+		sta pmg+$600,y
+		lda panak_doprava_hrac_3+15,x
+		sta pmg+$700,y		
+		dey
+		dex
+		bpl otoc_panaka_vpravo_k_truhle
+
+		lda panak_x
+		clc
+		adc #6
+		sta $d000
+		lda panak_y
+		sec
+		sbc #9
+		sta pozice_pokladu+1
+		ldy #$42
+		jsr akce_truhla
+		rts				
+
+panak_muze_jit_doprava
+		inc krokus
+		lda animator
+		bpl pohybuj_panakem_doprava		
+		lda #15
+		sta animator
+pohybuj_panakem_doprava
+		ldy animator
+		ldx panak_indexy_animaci_v_ose_x,y
+		
+		lda #14
+		sta indexos		
+		ldy panak_y
+kresli_panaka_pri_pohybu_doprava
+		lda panak_doprava_hrac_1,x
+		sta pmg+$500,y
+		lda panak_doprava_hrac_2,x
+		sta pmg+$600,y
+		lda panak_doprava_hrac_3,x
+		sta pmg+$700,y
+		dex
+		dey
+		dec indexos
+		bpl kresli_panaka_pri_pohybu_doprava
+		
+		lda panak_x
+		cmp #$98
+		bcc pravy_flag
+		
+pravy_scrol_flag
+		lda #$ff
+		beq pravy_flag
+		
+		lda horizontalnik
+		bne horizontalnik_smerem_doprava_neni_0
+		lda dlist_game_radek1 ; jsme uplne vpravo?
+		and #$1f
+		cmp #$1c
+		beq pravy_flag
+		lda #3
+		sta horizontalnik
+		sta $d404
+		sta muj_d404+1
+		lda #1
+		sta citanka
+		jsr obraz_dolu
+		jmp panak_nemuze_jit_doprava
+horizontalnik_smerem_doprava_neni_0
+		sec
+		sbc #1
+		sta horizontalnik
+		sta $d404
+		sta muj_d404+1
+		jmp panak_nemuze_jit_doprava
+		
+pravy_flag
+		lda #$ff
+		beq panak_nemuze_jit_doprava		
+		ldx panak_x
+		inx
+		stx panak_x		
+		stx $d001
+		stx muj_d001+1
+		stx $d002
+		stx muj_d002+1
+		stx $d003
+		stx muj_d003+1
+		
+panak_nemuze_jit_doprava
+		ldx rychlost
+		jsr big_wait ; rychlost pohybu hrace
+		dec animator
+		bmi	konec_pohybu_panakem_doprava
+		lda animator
+		cmp #7
+		beq konec_pohybu_panakem_doprava		
+		jmp pohybuj_panakem_doprava
+konec_pohybu_panakem_doprava
+		jsr prover_sebrani_ovoce
+		beq neni_zastaveni_pri_pohybu_doprava
+		rts
+		
+neni_zastaveni_pri_pohybu_doprava		
+		lda pravy_flag+1
+		beq neodecitej_kroky_doprava
+		jsr odecti_kroky
+		bne neodecitej_kroky_doprava
+		rts
+		
+neodecitej_kroky_doprava		
+		lda taken_lo
+		ora taken_hi
+		bne taken_neni_nulovy_pri_pohybu_doprava
+		rts
+taken_neni_nulovy_pri_pohybu_doprava
+
+		jmp pokracuj_v_pohybu_panaka_doprava		
+		
+pohyb_panaka_dolu
+		lda #0
+		sta krokus ; pocet kroku, co jsem udelal
+pokracuj_v_pohybu_panaka_dolu
+		lda #$ff
+		sta dolni_flag+1 ; default je, ze panak muze jit dolu
+		sta dolni_scrol_flag+1 ; default je, ze pri pohybu dolu nescrolujeme
+
+		jsr zjisti_pozici_panaka
+		ldy #$c0 ; copak je pod panakem?
+		lda (zapisnik),y		
+		cmp #truhla_zavrena-1 ; je tam truhla?
+		beq panak_dole_narazil_na_truhlu
+		cmp #truhla_otevrena-1
+		beq panak_dole_na_neco_narazil		
+		cmp #1 ; je tam zed?
+		beq panak_dole_na_neco_narazil
+		cmp #$83 ; je tam kytka?
+		bne panak_muze_jit_dolu
+		lda stitus
+		bne panak_muze_jit_dolu
+panak_dole_na_neco_narazil		
+		lda krokus
+		beq smerem_dolu_tlacime_do_prekazky
+		rts	
+		
+panak_dole_narazil_na_truhlu
+		ldx #16
+		ldy panak_y
+otoc_panaka_dolu_k_truhle
+		lda panak_dolu_hrac_1+17,x
+		sta pmg+$500,y
+		lda panak_dolu_hrac_2+17,x
+		sta pmg+$600,y
+		lda panak_dolu_hrac_3+17,x
+		sta pmg+$700,y
+		dey
+		dex
+		bpl otoc_panaka_dolu_k_truhle
+
+		lda panak_x		
+		sec
+		sbc #2
+		sta $d000 ; x-ova pozice PMG pokladu
+		lda panak_y
+		clc
+		adc #7
+		sta pozice_pokladu+1 ; y-ova pozice PMG pokladu
+		lda zapisnik
+		clc
+		adc #$80
+		sta zapisnik
+		lda zapisnik+1
+		adc #0
+		sta zapisnik+1
+		ldy #$40				
+		jsr akce_truhla
+		rts		
+		
+smerem_dolu_tlacime_do_prekazky		
+		dec panak_y
+		dec panak_y
+		lda #0
+		sta dolni_flag+1
+		beq nastaveni_pohybu_panaka_dolu_vyreseno
+
+panak_muze_jit_dolu
+		lda panak_y
+		cmp #pmg_vrsek+$70
+		bcc nastaveni_pohybu_panaka_dolu_vyreseno		
+		lda dlist_game_radek24+1 ; jsme uplne dole?
+		cmp #>screen_game+$c00
+		beq nastaveni_pohybu_panaka_dolu_vyreseno
+		lda #0 ; ano, scroluj, pokud nejsme uplne dole
+		sta dolni_scrol_flag+1
+		dec panak_y
+		dec panak_y		
+		
+nastaveni_pohybu_panaka_dolu_vyreseno
+		inc krokus
+		lda animator
+		bpl pohybuj_panakem_dolu
+		lda #15
+		sta animator
+pohybuj_panakem_dolu
+		ldy animator
+		ldx panak_indexy_animaci_v_ose_y,y
+		
+		lda #16
+		sta indexos		
+		ldy panak_y
+		iny
+		iny
+kresli_panaka_pri_pohybu_dolu
+		lda panak_dolu_hrac_1,x
+		sta pmg+$500,y
+		lda panak_dolu_hrac_2,x
+		sta pmg+$600,y
+		lda panak_dolu_hrac_3,x
+		sta pmg+$700,y
+		dex
+		dey
+		dec indexos
+		bpl kresli_panaka_pri_pohybu_dolu		
+		
+dolni_scrol_flag
+		lda #$ff	
+		bne dolni_flag
+		
+		lda vertikalnik
+		beq vertikalnik_smerem_dolu_je_0
+		cmp #6
+		bne vertikalnik_smerem_dolu_neni_7		
+		lda #0
+		sta vertikalnik
+		sta $d405
+		lda #$40
+		sta citanka
+		jsr obraz_dolu
+		jmp panak_nemuze_jit_dolu
+vertikalnik_smerem_dolu_je_0		
+		lda dlist_game_radek24+1 ; jsme uplne dole?
+		cmp #>screen_game+$c00
+		bne ne_nejsme_uplne_dole
+		lda dlist_game_radek24
+		cmp #$40
+		bcs dolni_flag
+ne_nejsme_uplne_dole		
+		lda vertikalnik
+vertikalnik_smerem_dolu_neni_7
+		clc
+		adc #2
+		sta vertikalnik
+		sta $d405
+		jmp panak_nemuze_jit_dolu
+		
+dolni_flag
+		lda #$ff
+		beq panak_nemuze_jit_dolu
+		inc panak_y
+		inc panak_y
+		
+panak_nemuze_jit_dolu
+		ldx rychlost
+		jsr big_wait ; rychlost pohybu hrace
+		dec animator
+		bmi konec_pohybu_panakem_dolu
+		lda animator
+		cmp #7
+		beq konec_pohybu_panakem_dolu
+		jmp pohybuj_panakem_dolu		
+konec_pohybu_panakem_dolu
+		lda dolni_flag+1
+		and dolni_scrol_flag+1
+		bne panak_pri_pohybu_dolu_neslapal_na_miste
+		inc panak_y
+		inc panak_y		
+		
+panak_pri_pohybu_dolu_neslapal_na_miste
+		jsr prover_sebrani_ovoce		
+		beq neni_zastaveni_pri_pohybu_dolu		
+		rts
+		
+neni_zastaveni_pri_pohybu_dolu
+		lda dolni_scrol_flag+1 ; scrolovali jsme?
+		beq odecitej_kroky_pri_pohybu_dolu
+		lda dolni_flag+1
+		beq neodecitej_kroky_pri_pohybu_dolu		
+odecitej_kroky_pri_pohybu_dolu
+		jsr odecti_kroky
+		bne neodecitej_kroky_pri_pohybu_dolu
+		rts
+		
+neodecitej_kroky_pri_pohybu_dolu
+		lda taken_lo
+		ora taken_hi
+		bne panak_pri_pohybu_dolu_nesebral_pozadovane_mnozstvi_ovoce
+		rts
+panak_pri_pohybu_dolu_nesebral_pozadovane_mnozstvi_ovoce
+		jmp pokracuj_v_pohybu_panaka_dolu
+		
+pohyb_panaka_nahoru
+		lda #0
+		sta krokus ; pocet kroku, co jsem udelal
+pokracuj_v_pohybu_panaka_nahoru
+		lda #$ff
+		sta horni_flag+1 ; default je, ze panak muze jit nahoru
+		sta horni_scrol_flag+1 ;  ; default je, ze pri pohybu nahoru nescrolujeme
+
+		jsr zjisti_pozici_panaka
+		ldy #0 ; copak je nad panakem?
+		lda (zapisnik),y
+		cmp #truhla_zavrena+1 ; je tam truhla?
+		beq panak_nahore_narazil_na_truhlu		
+		cmp #truhla_otevrena-3
+		beq panak_nahore_na_neco_narazil		
+		cmp #1 ; je tam zed?
+		beq panak_nahore_na_neco_narazil
+		cmp #5 ; je tam kytka
+		bne panak_muze_jit_nahoru
+		lda stitus
+		bne panak_muze_jit_nahoru		
+panak_nahore_na_neco_narazil
+		lda krokus
+		beq smerem_nahoru_tlacime_do_prekazky
+		rts	
+		
+panak_nahore_narazil_na_truhlu
+		ldx #16		
+		ldy panak_y
+		iny
+		iny
+otoc_panaka_nahoru_k_truhle
+		lda panak_nahoru_hrac_1+17,x
+		sta pmg+$500,y
+		lda panak_nahoru_hrac_2+17,x
+		sta pmg+$600,y
+		lda panak_nahoru_hrac_3+17,x
+		sta pmg+$700,y
+		dey
+		dex
+		bpl otoc_panaka_nahoru_k_truhle
+
+		lda panak_x		
+		sec
+		sbc #2
+		sta $d000 ; x-ova pozice PMG pokladu
+		lda panak_y
+		sec
+		sbc #25
+		sta pozice_pokladu+1 ; y-ova pozice PMG pokladu
+		lda zapisnik
+		sec
+		sbc #$40
+		sta zapisnik
+		lda zapisnik+1
+		sbc #0
+		sta zapisnik+1
+		ldy #0			
+		jsr akce_truhla
+		rts				
+		
+smerem_nahoru_tlacime_do_prekazky		
+		inc panak_y
+		inc panak_y
+		lda #0
+		sta horni_flag+1
+		beq nastaveni_pohybu_panaka_nahoru_vyreseno
+
+panak_muze_jit_nahoru
+		lda panak_y
+		cmp #pmg_vrsek+$50
+		bcs nastaveni_pohybu_panaka_nahoru_vyreseno
+		lda dlist_game_radek1+1 ; jsme uplne nahore?
+		cmp #>screen_game
+		bne necht_panak_pri_pohybu_nahoru_scroluje
+		lda dlist_game_radek1 ; jsme uplne nahore?
+		cmp #$40		
+		bcc nastaveni_pohybu_panaka_nahoru_vyreseno
+necht_panak_pri_pohybu_nahoru_scroluje
+		lda #0 ; ano, scroluj, pokud nejsme uplne nahore
+		sta horni_scrol_flag+1
+		inc panak_y
+		inc panak_y		
+		
+nastaveni_pohybu_panaka_nahoru_vyreseno
+		inc krokus
+		lda animator
+		bpl pohybuj_panakem_nahoru
+		lda #15
+		sta animator
+pohybuj_panakem_nahoru
+		ldy animator
+		ldx panak_indexy_animaci_v_ose_y,y
+		
+		lda #16
+		sta indexos		
+		ldy panak_y
+kresli_panaka_pri_pohybu_nahoru
+		lda panak_nahoru_hrac_1,x
+		sta pmg+$500,y
+		lda panak_nahoru_hrac_2,x
+		sta pmg+$600,y
+		lda panak_nahoru_hrac_3,x
+		sta pmg+$700,y
+		dex
+		dey
+		dec indexos
+		bpl kresli_panaka_pri_pohybu_nahoru
+		
+horni_scrol_flag
+		lda #$ff
+		bne horni_flag
+		
+		lda vertikalnik
+		bne vertikalnik_smerem_nahoru_neni_0
+		lda dlist_game_radek1+1 ; jsme uplne nahore?
+		cmp #>screen_game
+		bne ne_nejsme_uplne_nahore
+		lda dlist_game_radek1 ; jsme uplne nahore?
+		cmp #$40		
+		bcc horni_flag
+ne_nejsme_uplne_nahore
+		lda #6
+		sta vertikalnik
+		sta $d405
+		lda #$40
+		sta citanka
+		jsr obraz_nahoru
+		jmp panak_nemuze_jit_nahoru
+vertikalnik_smerem_nahoru_neni_0
+		sec
+		sbc #2
+		sta vertikalnik
+		sta $d405
+		jmp panak_nemuze_jit_nahoru
+		
+horni_flag
+		lda #$ff
+		beq panak_nemuze_jit_nahoru		
+		dec panak_y
+		dec panak_y
+		
+panak_nemuze_jit_nahoru
+		ldx rychlost
+		jsr big_wait ; rychlost pohybu hrace
+		dec animator
+		bmi konec_pohybu_panakem_nahoru
+		lda animator
+		cmp #7
+		beq konec_pohybu_panakem_nahoru
+		jmp pohybuj_panakem_nahoru		
+konec_pohybu_panakem_nahoru				
+		lda horni_flag+1
+		and horni_scrol_flag+1
+		bne panak_pri_pohybu_nahoru_neslapal_na_miste
+		dec panak_y
+		dec panak_y
+panak_pri_pohybu_nahoru_neslapal_na_miste
+		jsr prover_sebrani_ovoce	
+		beq neni_zastaveni_pri_pohybu_nahoru
+		rts
+				
+neni_zastaveni_pri_pohybu_nahoru
+		lda horni_scrol_flag+1 ; scrolovali jsme?
+		beq odecitej_kroky_pri_pohybu_nahoru
+		lda horni_flag+1
+		beq neodecitej_kroky_pri_pohybu_nahoru
+odecitej_kroky_pri_pohybu_nahoru
+		jsr odecti_kroky
+		bne neodecitej_kroky_pri_pohybu_nahoru
+		rts
+		
+neodecitej_kroky_pri_pohybu_nahoru
+		lda taken_lo
+		ora taken_hi
+		bne panak_pri_pohybu_nahoru_nesebral_pozadovane_mnozstvi_ovoce
+		rts
+panak_pri_pohybu_nahoru_nesebral_pozadovane_mnozstvi_ovoce
+		jmp pokracuj_v_pohybu_panaka_nahoru
+		
+zjisti_pozici_panaka
+		lda panak_y
+		sec
+		sbc #pmg_vrsek
+		lsr @
+		lsr @
+		lsr @
+		lsr @
+		tay
+		dey
+		ldx dlist_prepocet,y
+		lda dlist_game_radek1,x ; mam LMS radku nad radkem, kde stoji panak
+		sta zapisnik
+		lda dlist_game_radek1+1,x
+		sta zapisnik+1
+		
+		lda panak_x
+		sec
+		sbc #pmg_bok
+		lsr @
+		lsr @ ; mam sloupec, na kterem panak stoji
+		clc
+		adc #$44 ; posun na dalsi radek plus 4 znaky, co nejsou videt
+		adc zapisnik
+		sta zapisnik
+		lda zapisnik+1
+		adc #0
+		sta zapisnik+1
+		;lda #0
+		;tay
+		;sta (zapisnik),y		
+		rts
+		
+smaz_game_screen
+		lda #>screen_game
+		sta smazej_jednu_stranku_game_screen+2
+mazej_game_screen
+		lda #0
+		tax
+smazej_jednu_stranku_game_screen
+		sta screen_game,x
+		inx
+		bne smazej_jednu_stranku_game_screen
+		inc smazej_jednu_stranku_game_screen+2
+		lda smazej_jednu_stranku_game_screen+2
+		cmp #>(screen_game+$c00)
+		bne mazej_game_screen
+		rts
+		
+vykresli_mavajiciho_sviste ; 33a2
+		lda mavac
+		bne vykresleni_mavajiciho_sviste_vyreseno
+		
+		ldy mavatko
+		ldx	mavajici_pete_indexy_animaci,y
+		lda #16
+		sta indexos
+		
+		lda panak_y
+		sec
+		sbc #16
+		tay
+zapis_mavajiciho_sviste
+		lda pete_mava_hrac_1,x
+		sta pmg+$500,y		
+		lda pete_mava_hrac_2,x
+		sta pmg+$600,y
+		lda pete_mava_hrac_3,x
+		sta pmg+$700,y		
+		iny
+		inx
+		dec indexos
+		bpl zapis_mavajiciho_sviste
+		
+		lda mavatko
+		bne mavatko_neni_nula
+		lda #$ff
+		sta mavac
+		lda #11
+		sta mavatko
+		bne vykresleni_mavajiciho_sviste_vyreseno
+		
+mavatko_neni_nula		
+		dec mavatko
+		ldx #5
+cekej_po_mavatku
+		lda 20
+cekani_po_mavatku
+		ldy 764
+		cpy #$ff
+		bne vykresleni_mavajiciho_sviste_vyreseno
+		ldy 632
+		cpy #15
+		bne vykresleni_mavajiciho_sviste_vyreseno
+		ldy 644
+		beq vykresleni_mavajiciho_sviste_vyreseno
+		cmp 20
+		beq cekani_po_mavatku
+		dex
+		bpl cekej_po_mavatku
+		
+vykresleni_mavajiciho_sviste_vyreseno
+		rts		
+		
+vykresli_pripraveneho_sviste
+		ldy panak_y
+		ldx #16
+zapis_pripraveneho_sviste
+		lda panak_dolu_hrac_1+17,x
+		sta pmg+$500,y		
+		lda panak_dolu_hrac_2+17,x
+		sta pmg+$600,y
+		lda panak_dolu_hrac_3+17,x
+		sta pmg+$700,y		
+		dey
+		dex
+		bpl zapis_pripraveneho_sviste
+		lda panak_x
+		sta $d001
+		sta muj_d001+1
+		sta $d002
+		sta muj_d002+1
+		sta $d003
+		sta muj_d003+1
+		rts
+		
+vykresli_horiciho_sviste		
+		
+		ldx #<rmt_track_1 ; je jedno, ze pustim vzdy prvni track pri vybuchu sviste, hudba u toho stejne nehraje
+		ldy #>rmt_track_1
+		lda #$0d ; pouze sfx
+		jsr rmt_player		
+		
+		lda #$21
+		sta rmt_efekt
+		
+		jsr wait
+		lda #$3a
+		sta 704
+		sta $d012
+		lda #$84		
+		sta 705
+		sta $d013
+		lda #$fe
+		sta 706
+		sta $d014
+		lda #0
+		sta 707
+		sta $d015
+		lda panak_x
+		sta $d000
+		
+		jsr zjisti_pozici_panaka		
+		
+		ldx #0
+		lda #7
+		sta indexos
+vykresli_dalsi_animaci_horiciho_sviste		
+		lda panak_y
+		sec
+		sbc #15
+		tay
+		lda #15
+		sta counter
+zapis_horiciho_sviste
+		lda horici_pete_hrac_0,x
+		sta pmg+$400,y
+		lda horici_pete_hrac_1,x
+		sta pmg+$500,y
+		lda horici_pete_hrac_2,x
+		sta pmg+$600,y
+		lda horici_pete_hrac_3,x
+		sta pmg+$700,y
+		iny
+		inx
+		dec counter
+		bpl zapis_horiciho_sviste
+		
+		:5 jsr wait
+		dec indexos
+		bne vykresli_dalsi_animaci_horiciho_sviste
+		
+		; 10100110 = $a6 zelena
+		; 01011000 = $58 fialova
+		; 11111110 = $fe vysledek
+		
+		lda #32
+		sta 623
+		sta $d01b
+		lda #$58
+		sta 706
+		sta $d014		
+		
+		lda #4
+		sta indexos
+vykresli_dalsi_animaci_horiciho_sviste_faze_dva
+		lda panak_y
+		sec
+		sbc #15
+		tay
+		lda #15
+		sta counter
+zapis_horiciho_sviste_faze_dva
+		lda horici_pete_hrac_0,x
+		sta pmg+$400,y
+		lda horici_pete_hrac_1,x
+		sta pmg+$500,y
+		lda horici_pete_hrac_2,x
+		sta pmg+$600,y
+		lda horici_pete_hrac_3,x
+		sta pmg+$700,y
+		iny
+		inx
+		dec counter
+		bpl zapis_horiciho_sviste_faze_dva
+		
+		stx uloz_x_horici_svist+1
+		sty uloz_y_horici_svist+1
+		
+		lda indexos
+		asl @
+		asl @
+		tax
+		
+		ldy #$40
+		lda horici_pete_znaky,x
+		sta (zapisnik),y
+		lda horici_pete_znaky+1,x
+		iny
+		sta (zapisnik),y
+		ldy #$80
+		lda horici_pete_znaky+2,x
+		sta (zapisnik),y
+		iny
+		lda horici_pete_znaky+3,x
+		sta (zapisnik),y
+		
+uloz_x_horici_svist
+		ldx #$ff
+		
+		:5 jsr wait
+		dec indexos
+		bpl vykresli_dalsi_animaci_horiciho_sviste_faze_dva		
+		
+uloz_y_horici_svist
+		ldy #$ff
+		
+		lda #0
+		sta pmg+$5ff,y
+		
+		ldx #5
+		jsr big_wait
+		
+		sed
+		lda lives
+		sec
+		sbc #1
+		sta lives
+		
+		lda sprejus
+		cmp #$99
+		beq umre_a_ma_99_spreju_to_proste_nechapes
+		clc
+		adc #1
+		sta sprejus		
+umre_a_ma_99_spreju_to_proste_nechapes		
+		cld
+		
+		jsr vypis_lives
+		
+		lda lives
+		beq tak_jsme_dosli_nazdar_babi
+		
+		ldx #40
+		jsr big_wait
+		jsr nastav_vsechny_barvy_na_e0
+		
+		lda #$50 ; decimalni cislo
+		sta steps_lo		
+		lda #0
+		sta steps_hi
+		
+tak_jsme_dosli_nazdar_babi		
+		rts
+		
+vykresli_vitezneho_sviste
+		ldy panak_y
+		ldx #16
+zapis_vitezneho_sviste
+		lda panak_mavajici_hrac_1,x
+		sta pmg+$500,y
+		lda panak_mavajici_hrac_2,x
+		sta pmg+$600,y
+		lda panak_mavajici_hrac_3,x
+		sta pmg+$700,y
+		dey
+		dex
+		bpl zapis_vitezneho_sviste
+		lda panak_x		
+		sta $d001
+		sta muj_d001+1
+		sta $d002
+		sta muj_d002+1
+		sta $d003
+		sta muj_d003+1
+		rts		
+		
+prover_sebrani_ovoce ; na vystupu je A=0 pokud se panak nema zastavit (STOP = ne), A<>0 pokud ano (STOP = ano)
+		lda #0
+		sta stopnik
+prover_sebrani_ovoce_po_teleportu
+		jsr zjisti_pozici_panaka
+		ldy #$40
+		lda (zapisnik),y
+		cmp #7
+		bne nesebral_jsem_ovoce
+		
+		jsr smaz_misto_pod_svistem
+		
+		sed
+		lda taken_lo
+		sec
+		sbc #1
+		sta taken_lo
+		lda taken_hi
+		sbc #0
+		sta taken_hi		
+
+		lda combo
+		clc
+		adc #1
+		sta combo		
+		cld
+		
+		lda #$22 ; sebrani ovoce
+		sta rmt_efekt
+		
+		lda lahvus
+		ora rychlost
+		beq uber_z_predmetove_cary_vyresen
+		jsr uber_z_predmetove_cary
+		lda pravak
+		cmp #15
+		bne uber_z_predmetove_cary_vyresen
+		lda #0 ; Pete ma odpracovano
+		sta lahvus
+		sta rychlost
+		jsr nahod_normalni_smery_joysticku
+uber_z_predmetove_cary_vyresen
+		
+		jsr vypis_taken
+		jsr vypis_combo
+		;lda #0 ; nezastavuj se
+		lda stitus ; mam se zastavit, pokud mam stit?
+		ora stopnik ; nebo jsem prosel teleportem?
+		rts
+				
+nesebral_jsem_ovoce
+		cmp #11 ; reset
+		bne nesebral_jsem_reset
+		
+		lda #$1e
+		sta rmt_efekt
+		lda #0
+		sta stitus ; zrus stit	
+		sta lahvus ; zrus lahev
+		sta rychlost ; zrus pomalost
+		jsr smaz_misto_pod_svistem		
+		jsr vykresli_pripraveneho_sviste
+		jsr pripocti_combo_kroky
+		
+		ldx #40
+		jsr big_wait		
+		jsr smazani_predmetu
+		jsr smaz_predmetovou_caru
+		jsr nahod_normalni_smery_joysticku
+				
+		ldx #63
+		lda #0
+smaz_kytky_a_ovoce_pri_resetu
+		sta font_game+3*8,x
+		dex
+		bpl smaz_kytky_a_ovoce_pri_resetu
+		
+		ldx #40
+		jsr big_wait
+				
+		jsr nasad_ovoce_do_screenu
+		
+		jsr zapis_barvy_levelu
+		lda #1 ; zastav se!
+		rts
+		
+nesebral_jsem_reset
+		cmp #15 ; dvere
+		bne nesebral_jsem_dvere
+		jsr smaz_misto_pod_svistem
+		
+		lda #0
+		sta taken_lo
+		sta taken_hi		
+		rts
+		
+nesebral_jsem_dvere
+		cmp #19+128 ; stit
+		bne nesebral_jsem_stit		
+		
+		jsr smaz_misto_pod_svistem
+		jsr pust_sfx_pro_sebrani_predmetu
+		jsr inicializuj_predmetovou_caru
+		jsr nahod_normalni_smery_joysticku
+		
+		inc stitus
+				
+		lda #0
+		sta lahvus ; zrus lahev
+		sta rychlost ; zrus pomalost
+		lda stitus ; zastav se
+		rts
+		
+nesebral_jsem_stit
+		cmp #23 ; lahev
+		bne nesebral_jsem_lahev
+		
+		jsr smaz_misto_pod_svistem
+		jsr pust_sfx_pro_sebrani_negativniho_predmetu
+		jsr inicializuj_predmetovou_caru
+		jsr nahod_otocene_smery_joysticku
+		
+		inc lahvus
+		
+		lda #0 ; nezastavuj se
+		sta stitus ; zrus stit
+		sta rychlost ; zrus pomalost
+		lda stopnik ; neprosel jsem nahodou teleportem?
+		rts
+
+nesebral_jsem_lahev
+		cmp #27 ; bota
+		bne nesebral_jsem_botu
+		
+		jsr smaz_misto_pod_svistem
+		jsr pust_sfx_pro_sebrani_negativniho_predmetu
+		jsr inicializuj_predmetovou_caru
+		jsr nahod_normalni_smery_joysticku
+		
+		lda #1
+		sta rychlost
+		lda #0
+		sta stitus ; zrus stit
+		sta lahvus ; zrus lahev
+		lda stopnik ; neprosel jsem nahodou teleportem?
+		rts
+		
+nesebral_jsem_botu
+		cmp #31+128 ; teleport
+		beq sebral_jsem_teleport 
+		
+provereni_aktualni_pozice_panaka_dokonceno
+		;lda #0	
+		lda stitus ; mam se zastavit, pokud mam stit?
+		ora stopnik ; neprosel jsem nahodou teleportem?
+		rts
+			
+sebral_jsem_teleport
+		jsr smaz_misto_pod_svistem
+		jsr pust_sfx_pro_sebrani_predmetu
+		jsr vykresli_pripraveneho_sviste
+		
+		ldx #40
+		jsr big_wait
+		
+		ldy panak_y
+		ldx #14 ; vyska panaka
+smaz_panaka_pred_teleportem
+		lda #0
+		sta pmg+$500-14,y
+		sta pmg+$600-14,y
+		sta pmg+$700-14,y
+		jsr wait
+		jsr wait
+		iny
+		dex
+		bpl smaz_panaka_pred_teleportem
+		
+		lda dlist_game_radek1+1
+		sec
+		sbc #$a0
+		asl @
+		sta radek
+		
+		lda dlist_game_radek1
+		asl @
+		lda radek
+		adc #0
+		sta radek ; nyni mam cislo radku, ktery je jako prvni zobrazen
+		
+		lda panak_y
+		sec
+		sbc #$22
+		lsr @
+		lsr @
+		lsr @
+		lsr @
+		clc
+		adc radek
+		sta radek ; nyni mam cislo radku, na kterem Pete stoji ($01 az $17)
+		
+		lda dlist_game_radek1
+		and #$1f
+		lsr @
+		sta sloupec
+		
+		lda panak_x
+		sec
+		sbc #$40
+		lsr @
+		lsr @
+		lsr @
+		clc
+		adc sloupec
+		sta sloupec ; nyni mam cislo sloupce, na kterem Pete stoji ($01 az $1c)
+		
+		lda $d20a
+		and #$0f ; o kolik radku se ma obraz posunout
+		tay
+		
+		lda radek
+		cmp #13	
+		bcs teleportuj_se_smerem_nahoru
+		jsr posun_obrazem_dolu
+		jmp radkovy_teleport_dokoncen
+teleportuj_se_smerem_nahoru
+		jsr posun_obrazem_nahoru		
+radkovy_teleport_dokoncen
+
+		lda dlist_game_radek1
+		asl @
+		bcs nepohnul_jsem_s_obrazem_az_uplne_nahoru
+		lda dlist_game_radek1+1
+		cmp #$a0
+		bne nepohnul_jsem_s_obrazem_az_uplne_nahoru
+		
+		; nyni muzu dat panaka v rozmezi $32 az $92
+		
+losuj_novou_y_pozici_panaka_pri_obraze_uplne_nahore
+		lda $d20a
+		and #7
+		cmp #7
+		beq losuj_novou_y_pozici_panaka_pri_obraze_uplne_nahore
+		clc
+		adc #3
+		asl @
+		asl @
+		asl @
+		asl @
+		adc #2
+		sta panak_y	
+		bne panak_v_y_ose_umisten
+		
+nepohnul_jsem_s_obrazem_az_uplne_nahoru ; 62 az 92
+		lda dlist_game_radek1
+		asl @
+		bcc nepohnul_jsem_s_obrazem_az_uplne_dolu
+		lda dlist_game_radek1+1
+		cmp #$a6
+		bne nepohnul_jsem_s_obrazem_az_uplne_dolu
+		
+		; nyni muzu dat panaka v rozmezi $62 az $C2
+		
+losuj_novou_y_pozici_panaka_pri_obraze_uplne_dole
+		lda $d20a
+		and #7
+		cmp #7
+		beq losuj_novou_y_pozici_panaka_pri_obraze_uplne_dole
+		clc
+		adc #6
+		asl @
+		asl @
+		asl @
+		asl @
+		adc #2
+		sta panak_y	
+		bne panak_v_y_ose_umisten
+
+nepohnul_jsem_s_obrazem_az_uplne_dolu
+
+		; nyni muzu dat panaka pouze v rozmezi $62 az $92
+		
+		lda $d20a
+		and #3
+		clc
+		adc #6
+		asl @
+		asl @
+		asl @
+		asl @
+		adc #2
+		sta panak_y
+
+panak_v_y_ose_umisten
+
+		lda $d20a
+		and #$0f ; o kolik sloupcu se ma obraz posunout
+		tay
+		
+		lda sloupec
+		cmp #15
+		bcs teleportuj_se_smerem_doleva
+		jsr posun_obrazem_doprava
+		jmp sloupcovy_teleport_dokoncen
+teleportuj_se_smerem_doleva
+		jsr posun_obrazem_doleva
+sloupcovy_teleport_dokoncen
+		
+		lda dlist_game_radek1
+		and #$7f
+		bne nepohnul_jsem_s_obrazem_az_uplne_doleva
+		
+		; nyni muzu dat panaka pouze v rozmezi $48 az $98
+
+losuj_novou_x_pozici_panaka_pri_obraze_uplne_vlevo
+		lda $d20a
+		and #$0f
+		cmp #$0b
+		bcs losuj_novou_x_pozici_panaka_pri_obraze_uplne_vlevo
+		tax
+		lda pmg_souradnice_sloupcu,x
+		sta panak_x
+		bne panak_v_x_ose_umisten
+		
+nepohnul_jsem_s_obrazem_az_uplne_doleva
+		lda dlist_game_radek1
+		and #$7f
+		cmp #$1c
+		bne nepohnul_jsem_s_obrazem_az_uplne_doprava
+		
+		; nyni muzu dat panaka pouze v rozmezi $60 az $b0
+		
+losuj_novou_x_pozici_panaka_pri_obraze_uplne_vpravo
+		lda $d20a
+		and #$0f
+		cmp #$0b
+		bcs losuj_novou_x_pozici_panaka_pri_obraze_uplne_vpravo
+		tax
+		lda pmg_souradnice_sloupcu+3,x
+		sta panak_x
+		bne panak_v_x_ose_umisten		
+		
+		; nyni muzu dat panaka pouze v rozmezi $60 az $98
+		
+nepohnul_jsem_s_obrazem_az_uplne_doprava
+		lda $d20a
+		and #$07
+		tax
+		lda pmg_souradnice_sloupcu+3,x
+		sta panak_x		
+
+panak_v_x_ose_umisten
+		lda panak_x		
+		sta muj_d001+1
+		sta muj_d002+1
+		sta muj_d003+1
+		
+		jsr pust_sfx_pro_sebrani_predmetu
+
+		ldy panak_y
+		ldx #16
+vykresli_panaka_po_teleportu
+		lda panak_dolu_hrac_1+17,x
+		sta pmg+$500,y		
+		lda panak_dolu_hrac_2+17,x
+		sta pmg+$600,y
+		lda panak_dolu_hrac_3+17,x
+		sta pmg+$700,y		
+		jsr wait
+		jsr wait
+		dey
+		dex
+		bpl vykresli_panaka_po_teleportu
+		
+		lda #1 ; flag, ze jsem prosel teleportem
+		sta stopnik
+		jmp prover_sebrani_ovoce_po_teleportu
+		
+pmg_souradnice_sloupcu
+		dta $48,$50,$58,$60,$68,$70,$78,$80,$88,$90,$98,$a0,$a8,$b0
+				
+vypis_taken
+		lda taken_lo
+		and #$0f
+		clc
+		adc #$10
+		sta status_bar+21
+		lda taken_lo
+		lsr @
+		lsr @
+		lsr @
+		lsr @
+		clc
+		adc #$10
+		sta status_bar+20
+		
+		lda taken_hi
+		and #$0f
+		clc
+		adc #$10
+		sta status_bar+19
+		rts
+		
+vypis_combo
+		lda combo
+		and #$0f
+		clc
+		adc #$10
+		sta status_bar+68
+		lda combo
+		lsr @
+		lsr @
+		lsr @
+		lsr @
+		clc
+		adc #$10
+		sta status_bar+67
+		rts
+		
+vypis_lives
+		lda lives
+		and #$0f
+		clc
+		adc #$10
+		sta status_bar+13
+		lda lives
+		lsr @
+		lsr @
+		lsr @
+		lsr @
+		clc
+		adc #$10
+		sta status_bar+12
+		rts
+		
+vypis_spreje
+		lda sprejus
+		and #$0f
+		clc
+		adc #$10
+		sta status_bar+53
+		lda sprejus
+		lsr @
+		lsr @
+		lsr @
+		lsr @
+		clc
+		adc #$10
+		sta status_bar+52
+		rts
+		
+vypis_steps
+		lda steps_lo
+		and #$0f
+		clc
+		adc #$10
+		sta status_bar+61
+		lda steps_lo
+		lsr @
+		lsr @
+		lsr @
+		lsr @
+		clc
+		adc #$10
+		sta status_bar+60
+		
+		lda steps_hi
+		and #$0f
+		clc
+		adc #$10
+		sta status_bar+59
+		rts			
+		
+dli_congratulations
+		pha
+		txa
+		pha
+		tya
+		pha
+		lda #$e0
+		sta $d018
+		lda #$0e
+		sta $d017
+		
+		jsr main_vbi
+		
+		pla
+		tay
+		pla
+		tax
+		pla
+		rti
+		
+dli_title_1
+		pha
+		lda #$c4
+		sta $d017
+		lda #$0c
+		sta $d018		
+		
+		lda #<dli_title_2
+		sta 512		
+		
+		ift [>dli_title_2]>[>dli_title_1]
+		
+		lda #>dli_title_2
+		sta 513
+		
+		eif
+		
+		pla
+		rti
+		
+dli_title_2
+		pha
+		lda #$3c
+		sta $d40a
+		sta $d018		
+		
+		lda #<dli_title_3
+		sta 512		
+		
+		ift [>dli_title_3]>[>dli_title_2]
+		
+		lda #>dli_title_3
+		sta 513
+		
+		eif
+		
+		pla
+		rti
+		
+dli_title_3
+		pha
+		lda #$38
+		sta $d40a
+		sta $d018
+		
+		lda #<dli_title_4
+		sta 512		
+		
+		ift [>dli_title_4]>[>dli_title_3]
+		
+		lda #>dli_title_4
+		sta 513
+		
+		eif
+		
+		pla
+		rti		
+		
+dli_title_4
+		pha
+		lda #$54
+		sta $d40a
+		sta $d018
+		lda #$ba ; barva napisu v1.1
+		sta $d017
+		
+		lda #<dli_title_5
+		sta 512		
+		
+		ift [>dli_title_5]>[>dli_title_4]
+		
+		lda #>dli_title_5
+		sta 513
+		
+		eif
+		
+		pla
+		rti			
+		
+dli_title_5
+		pha
+		lda #$82
+		sta $d40a
+		sta $d018		
+		
+		lda #<dli_title_6
+		sta 512		
+		
+		ift [>dli_title_6]>[>dli_title_5]
+		
+		lda #>dli_title_6
+		sta 513
+		
+		eif
+		
+		pla
+		rti			
+		
+dli_title_6
+		pha
+		txa
+		pha
+		tya		
+		pha
+		
+		;lda #0
+		;sta $d01a
+		
+		lda #$e0
+		sta $d018		
+		lda #$0e
+		sta $d017
+		lda #$0e
+		sta $d016
+		lda #$40+5 ; equalizer 2
+		sta $d001
+		lda #$40+5+5 ; equalizer 3
+		sta $d002
+		lda #$aa
+		sta $d003
+		lda #$8a ; barva equalizeru
+		sta $d013
+		sta $d014		
+		sta $d015		
+		
+		lda panak_x
+		cmp #86
+		beq prichod_panaka_dokoncen
+		
+		lda 20
+		lsr @
+		bcc prichod_panaka_na_obrazovku_vyresen
+		
+		ldy animator
+		ldx panak_indexy_animaci_v_ose_x,y
+		
+		lda #14
+		sta indexos		
+		ldy panak_y
+vykresli_panaka_pri_prichodu_na_obrazovku
+		lda panak_doprava_hrac_1,x
+		sta pmg+$500,y
+		lda panak_doprava_hrac_2,x
+		sta pmg+$600,y
+		lda panak_doprava_hrac_3,x
+		sta pmg+$700,y
+		dex
+		dey
+		dec indexos
+		bpl vykresli_panaka_pri_prichodu_na_obrazovku
+		
+		inc panak_x
+		
+		lda panak_x
+		cmp #86
+		bne panak_jeste_nedosel_az_k_logu
+		lda #$d0
+		sta 20
+			
+panak_jeste_nedosel_az_k_logu
+		dec animator
+		bpl prichod_panaka_na_obrazovku_vyresen
+		lda #7
+		sta animator
+		bne prichod_panaka_na_obrazovku_vyresen
+		
+prichod_panaka_dokoncen
+		lda #0
+		bne prichod_panaka_na_obrazovku_vyresen
+				
+		lda 20
+		bne kresli_vitezneho_svitle_v_title
+		
+		ldy panak_y
+		ldx #16
+zapis_pripraveneho_sviste_v_title
+		lda panak_dolu_hrac_1+17,x
+		sta pmg+$500,y		
+		lda panak_dolu_hrac_2+17,x
+		sta pmg+$600,y
+		lda panak_dolu_hrac_3+17,x
+		sta pmg+$700,y		
+		dey
+		dex
+		bpl zapis_pripraveneho_sviste_v_title		
+		
+		inc prichod_panaka_dokoncen+1
+		jmp prichod_panaka_na_obrazovku_vyresen
+		
+kresli_vitezneho_svitle_v_title
+		ldy panak_y
+		ldx #16
+zapis_vitezneho_sviste_v_title
+		lda panak_mavajici_hrac_1,x
+		sta pmg+$500,y
+		lda panak_mavajici_hrac_2,x
+		sta pmg+$600,y
+		lda panak_mavajici_hrac_3,x
+		sta pmg+$700,y
+		dey
+		dex
+		bpl zapis_vitezneho_sviste_v_title
+
+prichod_panaka_na_obrazovku_vyresen
+
+		;lda #$ff
+		;sta $d01a
+
+		jsr main_vbi		
+		
+		;lda #0
+		;sta $d01a
+		
+		lda #<dli_title_7
+		sta 512				
+		
+		ift [>dli_title_7]>[>dli_title_6]
+		
+		lda #>dli_title_7
+		sta 513
+		
+		eif
+		
+		pla
+		tay
+		pla
+		tax
+		pla
+		rti	
+		
+dli_title_7
+		pha
+		txa
+		pha
+		tya
+		pha
+		lda #$0a
+		sta $d017
+		;sta $d01a
+		
+		ldx #28
+		lda #0
+smazej_equalizery
+		sta pmg+$300+133-28,x
+		sta pmg+$400+133-28,x
+		sta pmg+$500+133-28,x
+		sta pmg+$600+133-28,x
+		sta pmg+$700+133-28,x
+		dex
+		bpl smazej_equalizery		
+		
+		lda $6058 ; volume1 pokey1
+		and #$0f
+		tax
+		beq nepis_equ1
+		ldy #133
+		lda #$0f
+pis_equ1		
+		sta pmg+$400,y
+		dey	
+		dey	
+		dex
+		bne pis_equ1			
+nepis_equ1
+
+		lda $6059 ; volume2 pokey1
+		and #$0f
+		tax
+		beq nepis_equ2
+		ldy #133
+		lda #$0f
+pis_equ2		
+		sta pmg+$500,y
+		dey	
+		dey	
+		dex
+		bne pis_equ2
+nepis_equ2
+
+		lda $605b ; volume3 pokey1
+		and #$0f
+		tax
+		beq nepis_equ3
+		ldy #133
+		lda #$0f
+pis_equ3		
+		sta pmg+$600,y
+		dey	
+		dey	
+		dex
+		bne pis_equ3
+nepis_equ3
+
+		lda $605c ; volume1 pokey2
+		and #$0f
+		tax
+		beq nepis_equ4
+		ldy #133
+		lda #$0f
+pis_equ4
+		sta pmg+$700,y
+		dey	
+		dey	
+		dex
+		bne pis_equ4
+nepis_equ4
+
+		lda $605d ; volume2 pokey2
+		and #$0f
+		tax
+		beq nepis_equ5
+		ldy #133
+		lda #1
+pis_equ5
+		sta pmg+$300,y
+		dey	
+		dey	
+		dex
+		bne pis_equ5
+nepis_equ5
+
+		lda $605f ; volume2 pokey2
+		and #$0f
+		tax
+		beq nepis_equ6
+		ldy #133		
+pis_equ6
+		lda pmg+$300,y
+		ora #4
+		sta pmg+$300,y
+		dey	
+		dey	
+		dex
+		bne pis_equ6
+nepis_equ6
+
+		;lda #0
+		;sta $d01a
+		
+		lda #<dli_title_8
+		sta 512		
+		
+		ift [>dli_title_8]>[>dli_title_7]
+		
+		lda #>dli_title_8
+		sta 513
+		
+		eif
+		
+		pla
+		tay
+		pla
+		tax
+		pla
+		rti			
+		
+dli_title_8
+		pha
+		lda #62
+		sta $d400
+		lda #$0e
+		sta $d017		
+		lda panak_x
+		sta $d001
+		sta $d002
+		sta $d003
+		
+		lda #<dli_title_1
+		sta 512		
+		
+		ift [>dli_title_8]>[>dli_title_1]
+		
+		lda #>dli_title_1
+		sta 513
+		
+		eif
+		
+		pla
+		rti	
+
+dli_game_1
+		pha
+		txa
+		pha
+		tya
+		pha
+		
+		lda stitus
+		beq stitus_vyresen
+		lda 20
+		and #3
+		bne stitus_vyresen
+		
+		jsr uber_z_predmetove_cary
+		
+		lda pravak
+		cmp #15
+		bne stitus_vyresen
+		lda #0
+		sta stitus
+		
+stitus_vyresen		
+		lda 20
+		and #15
+		lsr @
+		lsr @
+		tax
+		ldy animace_reset_indexy,x
+		
+		ldx #31
+animuj_reset
+		lda animace_reset,y
+		sta font_game+11*8,x		
+		dey
+		dex
+		bpl animuj_reset
+		
+		lda 20
+		and #$7f
+		lsr @
+		lsr @		
+		lsr @
+		tax
+		ldy animace_dvere_indexy,x
+		
+		ldx #31
+animuj_dvere
+		lda animace_dvere,y
+		sta font_game+15*8,x
+		dey
+		dex
+		bpl animuj_dvere
+		
+		lda 20
+		and #$3f
+		lsr @
+		lsr @
+		lsr @
+		tax
+		ldy animace_stit_indexy,x
+		
+		ldx #31
+animuj_stit
+		lda animace_stit,y
+		sta font_game+19*8,x		
+		dey
+		dex
+		bpl animuj_stit
+		
+		lda 20
+		and #$1f
+		lsr @
+		lsr @
+		lsr @
+		tax
+		ldy animace_lahev_indexy,x
+		
+		ldx #31
+animuj_lahev
+		lda animace_lahev,y
+		sta font_game+23*8,x		
+		lda animace_bota,y
+		sta font_game+27*8,x		
+		lda animace_teleport,y
+		sta font_game+31*8,x		
+		dey
+		dex
+		bpl animuj_lahev
+		
+		jsr main_vbi		
+		
+		lda #<dli_game_2
+		sta 512	
+		
+		ift [>dli_game_2]>[>dli_game_1]
+		
+		lda #>dli_game_2
+		sta 513
+		
+		eif
+		
+		pla
+		tay
+		pla
+		tax
+		pla
+		rti
+				
+dli_game_2
+		pha			
+		txa
+		pha
+		
+		lda #>status_bar_font
+		sta $d40a
+		sta $d409
+		lda #$e0
+		sta $d018
+		lda #$0c
+		sta $d017
+		lda #2
+		sta $d404
+		lda #$0
+		sta $d018
+		lda #16 ; PRIOR
+		sta $d01b
+		lda #$40
+		sta $d019
+		lda #$f0
+		sta $d013
+		sta $d014
+		sta $d015
+		
+		lda #$62-8 ; podklady ikonek
+		sta $d001
+		lda #$7e-8
+		sta $d002
+		lda #$9e-8
+		sta $d003
+		
+		lda blikator
+		beq neni_treba_blikat_ikonkou
+cekani_pri_bliknuti_ikonkou
+		lda #0
+		bne cekej_pro_dalsi_bliknuti_ikonkou
+		
+		ldx #6
+blikni_ikonkou
+		lda status_bar_font+$01*8,x
+		eor #$fe		
+		sta status_bar_font+$01*8,x
+		dex
+		bpl blikni_ikonkou
+		dec blikator		
+		lda #10
+		sta cekani_pri_bliknuti_ikonkou+1
+				
+cekej_pro_dalsi_bliknuti_ikonkou
+		dec cekani_pri_bliknuti_ikonkou+1
+		
+neni_treba_blikat_ikonkou
+		lda jiskros
+		ora jiskros+1
+		bne jiskros_neni_nulovy
+		dec pionyr
+		bne jiskros_vyresen
+		
+		ldx odleskus
+		lda animace_odlesku_indexy,x
+		tax
+		
+		lda animace_odlesku_data,x
+		sta font_game+$30*8
+		lda animace_odlesku_data+1,x
+		sta font_game+$30*8+1
+		lda animace_odlesku_data+2,x
+		sta font_game+$30*8+2
+		lda animace_odlesku_data+3,x
+		sta font_game+$30*8+3
+		lda animace_odlesku_data+4,x
+		sta font_game+$30*8+4		
+		lda #10
+		sta pionyr
+		dec odleskus
+		bpl jiskros_vyresen
+		lda #1
+		sta jiskros+1
+		lda $d20a
+		sta jiskros
+		lda #5
+		sta odleskus
+		bne jiskros_vyresen
+		
+jiskros_neni_nulovy
+		lda jiskros
+		sec
+		sbc #1
+		sta jiskros
+		lda jiskros+1
+		sbc #0
+		sta jiskros+1
+jiskros_vyresen		
+
+		lda #<dli_game_3
+		sta 512		
+		
+		ift [>dli_game_3]>[>dli_game_2]
+		
+		lda #>dli_game_3
+		sta 513
+		
+		eif		
+		
+		pla
+		tax
+		pla
+		rti
+		
+dli_game_3
+		pha
+muj_d404
+		lda #0
+		sta $d404				
+		lda mavac
+		beq nesnizuj_mavac
+		dec mavac
+nesnizuj_mavac	
+
+muj_d001
+		lda #$ff
+		sta $d001
+muj_d002
+		lda #$ff
+		sta $d002
+muj_d003
+		lda #$ff
+		sta $d003
+
+		lda #<dli_game_1
+		sta 512
+		
+		ift [>dli_game_3]>[>dli_game_1]
+		
+		lda #>dli_game_1
+		sta 513
+		
+		eif
+		
+		pla
+		rti
+		
+odecti_kroky ; na vystupu je A=0 (steps dosly) nebo A<>0 (steps nedosly)
+		sed
+		lda steps_lo
+		sec
+		sbc #1
+		sta steps_lo
+		lda steps_hi
+		sbc #0
+		sta steps_hi
+		cld
+		
+		jsr vypis_steps
+		
+		lda steps_lo
+		ora steps_hi		
+		
+		rts
+		
+big_wait ; v X je delka cekani		
+		jsr wait
+		dex
+		bpl big_wait
+		rts	
+		
+pripocti_combo_kroky
+		ldx #9
+cekani_pred_prepoctem_comba		
+		lda 20
+cekej_pred_prepoctem_comba
+		ldy 632
+		cpy #15
+		bne chce_urychlit_prepocitavani_comba
+		cmp 20
+		beq cekej_pred_prepoctem_comba
+		dex
+		bpl cekani_pred_prepoctem_comba		
+chce_urychlit_prepocitavani_comba
+
+		lda combo
+		beq nic_nesebral_amater
+		lsr @ ; prevod dekadickeho cisla na hexa
+		lsr @
+		lsr @
+		lsr @
+		tax
+		lda combo
+		and #$0f
+		clc
+		adc desitky_pro_prevod,x
+		tay				
+		
+pritej_combo_kroky
+		sed
+		lda #2
+		clc
+		adc steps_lo
+		sta steps_lo
+		lda steps_hi
+		adc #0
+		sta steps_hi		
+		lda steps_hi
+		and #$f0
+		beq steps_nepretekly
+		lda #$09
+		sta steps_hi
+		lda #$99
+		sta steps_lo		
+steps_nepretekly		
+		lda combo
+		sec
+		sbc #1
+		sta combo
+		cld
+		jsr vypis_combo
+		jsr vypis_steps
+		
+		lda #$a9 ; LDA #
+		sta ubirani_comba_zacatek
+		lda #$02 ; #$02
+		sta ubirani_comba_zacatek+1
+		lda #$85 ; STA ZP
+		sta ubirani_comba_zacatek+2
+		
+ubirani_comba_zacatek
+		lda #2
+		sta cekator		
+cekani_po_ubrani_comba
+		lda 20
+cekej_po_ubrani_comba
+		ldx 632
+		cpx #15
+		beq nesahnul_na_joystick_behem_cekani_po_ubrani_comba ; nektera moje navesti jsou uchylna, to priznavam
+		lda #$4c ; JMP
+		sta ubirani_comba_zacatek
+		lda #<ubirani_comba_konec ; LO adresa
+		sta ubirani_comba_zacatek+1
+		lda #>ubirani_comba_konec ; HI adresa
+		sta ubirani_comba_zacatek+2
+		bne ubirani_comba_konec		
+nesahnul_na_joystick_behem_cekani_po_ubrani_comba
+		cmp 20
+		beq cekej_po_ubrani_comba
+		dec cekator
+		bpl cekani_po_ubrani_comba	
+		
+ubirani_comba_konec
+		dey
+		bne pritej_combo_kroky
+nic_nesebral_amater		
+		rts
+		
+akce_sprej
+		lda mavatko
+		cmp #11
+		beq mavatko_nebylo_rozjete_pri_sprejovani
+		jsr vykresli_pripraveneho_sviste
+mavatko_nebylo_rozjete_pri_sprejovani		
+		lda #$ff
+		sta mavac
+		lda #11
+		sta mavatko
+		
+		lda sprejus ; mame nejake spreje?
+		beq nechce_horni_sprej
+		lda #12 ; barva spreje
+		sta 704
+		lda 632
+chce_snad_levy_sprej_ten_hrac_nebo_jako_o_co_tady_jde
+		cmp #11
+		bne nechce_levy_sprej
+		jsr akce_levy_sprej
+		rts
+nechce_levy_sprej
+		cmp #7
+		bne nechce_pravy_sprej
+		jsr akce_pravy_sprej
+		rts
+nechce_pravy_sprej
+		cmp #13
+		bne nechce_dolni_sprej
+		jsr akce_dolni_sprej
+		rts
+nechce_dolni_sprej		
+		cmp #14
+		bne nechce_horni_sprej
+		jsr akce_horni_sprej
+nechce_horni_sprej
+		rts
+
+akce_levy_sprej
+		ldx #14
+		ldy panak_y
+kresli_panaka_pri_levem_striku
+		lda panak_doleva_hrac_1+15,x
+		sta pmg+$500,y
+		lda panak_levy_strik_hrac_2,x
+		sta pmg+$600,y
+		lda panak_levy_strik_hrac_3,x
+		sta pmg+$700,y
+		dey
+		dex		
+		bpl kresli_panaka_pri_levem_striku
+
+		lda panak_x
+		sec
+		sbc #6
+		sta $d000
+		lda panak_y
+		sec
+		sbc #10
+		tay
+		
+		lda #$23
+		sta rmt_efekt
+		
+		ldx #30
+sprejuj_doleva
+		lda $d20a
+		and #16
+		sta pmg+$400,y
+		lda $d20a
+		and #24
+		sta pmg+$401,y
+		lda $d20a
+		and #28
+		sta pmg+$402,y
+		lda $d20a
+		and #30
+		sta pmg+$403,y
+		lda $d20a
+		and #31
+		sta pmg+$404,y
+		lda $d20a
+		and #30
+		sta pmg+$405,y
+		lda $d20a
+		and #28
+		sta pmg+$406,y
+		lda $d20a
+		and #24
+		sta pmg+$407,y
+		lda $d20a
+		and #16
+		sta pmg+$408,y		
+		jsr wait
+		dex
+		bpl sprejuj_doleva
+		
+		jsr smaz_sprej
+		
+		ldx #14
+		ldy panak_y
+odkresli_panaka_pri_levem_striku
+		lda panak_doleva_hrac_1+15,x
+		sta pmg+$500,y
+		lda panak_doleva_hrac_2+15,x
+		sta pmg+$600,y
+		lda panak_doleva_hrac_3+15,x
+		sta pmg+$700,y
+		dey
+		dex		
+		bpl odkresli_panaka_pri_levem_striku		
+		
+		jsr zjisti_pozici_panaka
+		ldy #$3e
+		lda (zapisnik),y
+		cmp #$83
+		bne vlevo_nebyla_pri_striku_kytka
+		
+		lda 711
+		sta 704
+		lda panak_x
+		sec
+		sbc #8
+		sta $d000
+		
+		jsr zapis_uschlou_kytku
+		
+vlevo_nebyla_pri_striku_kytka		
+		jsr cekej_po_akci_sprej
+				
+		rts
+		
+akce_pravy_sprej
+		ldx #14
+		ldy panak_y
+kresli_panaka_pri_pravem_striku
+		lda panak_doprava_hrac_1+15,x
+		sta pmg+$500,y
+		lda panak_pravy_strik_hrac_2,x
+		sta pmg+$600,y
+		lda panak_pravy_strik_hrac_3,x
+		sta pmg+$700,y
+		dey
+		dex		
+		bpl kresli_panaka_pri_pravem_striku
+
+		lda panak_x
+		clc
+		adc #3
+		sta $d000
+		lda panak_y
+		sec
+		sbc #10
+		tay
+		
+		lda #$23
+		sta rmt_efekt
+		
+		ldx #30
+sprejuj_doprava
+		lda $d20a
+		and #1
+		sta pmg+$400,y
+		lda $d20a
+		and #3
+		sta pmg+$401,y
+		lda $d20a
+		and #7
+		sta pmg+$402,y
+		lda $d20a
+		and #15
+		sta pmg+$403,y
+		lda $d20a
+		and #31
+		sta pmg+$404,y
+		lda $d20a
+		and #15
+		sta pmg+$405,y
+		lda $d20a
+		and #7
+		sta pmg+$406,y
+		lda $d20a
+		and #3
+		sta pmg+$407,y
+		lda $d20a
+		and #1
+		sta pmg+$408,y		
+		jsr wait
+		dex
+		bpl sprejuj_doprava
+		
+		jsr smaz_sprej		
+		
+		ldx #14
+		ldy panak_y
+odkresli_panaka_pri_pravem_striku
+		lda panak_doprava_hrac_1+15,x
+		sta pmg+$500,y
+		lda panak_doprava_hrac_2+15,x
+		sta pmg+$600,y
+		lda panak_doprava_hrac_3+15,x
+		sta pmg+$700,y
+		dey
+		dex		
+		bpl odkresli_panaka_pri_pravem_striku	
+		
+		jsr zjisti_pozici_panaka
+		ldy #$42
+		lda (zapisnik),y
+		cmp #$83
+		bne vpravo_nebyla_pri_striku_kytka
+		
+		lda zapisnik
+		clc
+		adc #4
+		sta zapisnik
+		lda zapisnik+1
+		adc #0
+		sta zapisnik+1
+		
+		lda 711
+		sta 704
+		lda panak_x
+		clc
+		adc #8
+		sta $d000
+		
+		jsr zapis_uschlou_kytku
+		
+vpravo_nebyla_pri_striku_kytka		
+		jsr cekej_po_akci_sprej
+				
+		rts		
+		
+akce_dolni_sprej
+		ldx #16
+		ldy panak_y
+		
+kresli_panaka_pri_dolnim_striku
+		lda panak_dolu_hrac_1+17,x
+		sta pmg+$500,y
+		lda panak_dolni_strik_hrac_2,x
+		sta pmg+$600,y
+		lda panak_dolni_strik_hrac_3,x
+		sta pmg+$700,y
+		dey
+		dex		
+		bpl kresli_panaka_pri_dolnim_striku
+
+		lda panak_x
+		clc
+		adc #1
+		sta $d000
+		lda panak_y
+		sec
+		sbc #3
+		tay
+		
+		lda #$23
+		sta rmt_efekt
+		
+		ldx #30
+sprejuj_dolu
+		lda $d20a
+		and #8
+		sta pmg+$400,y
+		lda $d20a
+		and #8
+		sta pmg+$401,y
+		lda $d20a
+		and #8
+		sta pmg+$402,y
+		lda $d20a
+		and #28
+		sta pmg+$403,y
+		lda $d20a
+		and #28
+		sta pmg+$404,y
+		lda $d20a
+		and #28
+		sta pmg+$405,y
+		lda $d20a
+		and #62
+		sta pmg+$406,y
+		lda $d20a
+		and #62
+		sta pmg+$407,y		
+		lda $d20a
+		and #62
+		sta pmg+$408,y
+		jsr wait
+		dex
+		bpl sprejuj_dolu
+		
+		jsr smaz_sprej		
+		
+		ldx #16
+		ldy panak_y
+odkresli_panaka_pri_dolnim_striku
+		lda panak_dolu_hrac_1+17,x
+		sta pmg+$500,y
+		lda panak_dolu_hrac_2+17,x
+		sta pmg+$600,y
+		lda panak_dolu_hrac_3+17,x
+		sta pmg+$700,y
+		dey
+		dex		
+		bpl odkresli_panaka_pri_dolnim_striku	
+		
+		jsr zjisti_pozici_panaka
+		ldy #$c0
+		lda (zapisnik),y
+		cmp #$83
+		bne dole_nebyla_pri_striku_kytka
+		
+		lda zapisnik
+		clc
+		adc #$82
+		sta zapisnik
+		lda zapisnik+1
+		adc #0
+		sta zapisnik+1
+		
+		lda 711
+		sta 704
+		lda panak_x
+		sta $d000
+		lda panak_y
+		clc
+		adc #16
+		sta panak_y
+		
+		jsr zapis_uschlou_kytku
+		
+		lda panak_y
+		sec
+		sbc #16
+		sta panak_y
+		
+dole_nebyla_pri_striku_kytka
+		jsr cekej_po_akci_sprej
+				
+		rts		
+		
+akce_horni_sprej
+		ldx #14
+		ldy panak_y
+		
+kresli_panaka_pri_hornim_striku
+		lda panak_nahoru_hrac_1+17,x
+		sta pmg+$500,y
+		lda panak_horni_strik_hrac_2,x
+		sta pmg+$600,y
+		lda panak_horni_strik_hrac_3,x
+		sta pmg+$700,y
+		dey
+		dex		
+		bpl kresli_panaka_pri_hornim_striku
+
+		lda panak_x
+		sec
+		sbc #2
+		sta $d000
+		lda panak_y
+		sec
+		sbc #18
+		tay
+		
+		lda #$23
+		sta rmt_efekt
+		
+		ldx #30
+sprejuj_nahoru
+		lda $d20a
+		and #62
+		sta pmg+$400,y
+		lda $d20a
+		and #62
+		sta pmg+$401,y
+		lda $d20a
+		and #62
+		sta pmg+$402,y
+		lda $d20a
+		and #28
+		sta pmg+$403,y
+		lda $d20a
+		and #16
+		sta pmg+$404,y
+		;lda $d20a
+		;and #28
+		;sta pmg+$405,y
+		;lda $d20a
+		;and #62
+		;sta pmg+$406,y
+		;lda $d20a
+		;and #62
+		;sta pmg+$407,y		
+		;lda $d20a
+		;and #62
+		;sta pmg+$408,y
+		jsr wait
+		dex
+		bpl sprejuj_nahoru
+		
+		jsr smaz_sprej		
+		
+		ldx #14
+		ldy panak_y
+odkresli_panaka_pri_hornim_striku
+		lda panak_nahoru_hrac_1+17,x
+		sta pmg+$500,y
+		lda panak_nahoru_hrac_2+17,x
+		sta pmg+$600,y
+		lda panak_nahoru_hrac_3+17,x
+		sta pmg+$700,y
+		dey
+		dex		
+		bpl odkresli_panaka_pri_hornim_striku
+		
+		jsr zjisti_pozici_panaka
+		ldy #0
+		lda (zapisnik),y
+		cmp #5
+		bne nahore_nebyla_pri_striku_kytka
+		
+		lda zapisnik
+		sec
+		sbc #$7e
+		sta zapisnik
+		lda zapisnik+1
+		sbc #0
+		sta zapisnik+1
+		
+		lda 711
+		sta 704
+		lda panak_x
+		sta $d000
+		lda panak_y
+		sec
+		sbc #16
+		sta panak_y
+		
+		jsr zapis_uschlou_kytku
+		
+		lda panak_y
+		clc
+		adc #16
+		sta panak_y
+		
+nahore_nebyla_pri_striku_kytka
+		jsr cekej_po_akci_sprej
+				
+		rts				
+		
+cekej_po_akci_sprej
+		ldx #5
+		jsr big_wait
+cekej_na_pusteni_fire_po_akci_sprej		
+		lda 644
+		beq cekej_na_pusteni_fire_po_akci_sprej
+		rts
+	
+smaz_sprej
+		ldx #8
+		lda #0
+mazej_ten_sprej		
+		sta pmg+$400,y
+		iny
+		dex
+		bpl mazej_ten_sprej
+		sed
+		lda sprejus
+		sec
+		sbc #1
+		sta sprejus
+		cld
+		jsr vypis_spreje		
+		rts
+		
+zapis_uschlou_kytku
+		ldx #10
+		jsr big_wait
+		
+		lda #$1f
+		sta rmt_efekt
+
+		ldy #$3e
+		lda #27+34
+		sta (zapisnik),y
+		lda #28+34
+		iny
+		sta (zapisnik),y
+		ldy #$7e
+		lda #29+34
+		sta (zapisnik),y
+		iny
+		lda #30+34
+		sta (zapisnik),y		
+
+		lda #11
+		sta indexos
+		ldx #0
+		lda panak_y
+		sec
+		sbc #13
+		tay
+zapis_uschlou_kytku_faze_1
+		lda uschla_kytka_faze_1,x
+		sta pmg+$400,y
+		iny
+		inx
+		dec indexos
+		bpl zapis_uschlou_kytku_faze_1
+		
+		ldx #4
+		jsr big_wait
+		
+		ldy #$3e
+		lda #31+34
+		sta (zapisnik),y
+		lda #32+34
+		iny
+		sta (zapisnik),y
+		ldy #$7e
+		lda #33+34
+		sta (zapisnik),y
+		iny
+		lda #34+34
+		sta (zapisnik),y
+
+		lda #11
+		sta indexos
+		ldx #0
+		lda panak_y
+		sec
+		sbc #13
+		tay
+zapis_uschlou_kytku_faze_2
+		lda uschla_kytka_faze_2,x
+		sta pmg+$400,y
+		iny
+		inx
+		dec indexos
+		bpl zapis_uschlou_kytku_faze_2
+		
+		ldx #4
+		jsr big_wait
+		
+		ldy #$3e
+		lda #35+34
+		sta (zapisnik),y
+		lda #0
+		iny
+		sta (zapisnik),y
+		ldy #$7e
+		lda #36+34
+		sta (zapisnik),y
+		iny
+		lda #37+34
+		sta (zapisnik),y
+
+		lda #11
+		sta indexos
+		ldx #0
+		lda panak_y
+		sec
+		sbc #13
+		tay
+zapis_uschlou_kytku_faze_3
+		lda uschla_kytka_faze_3,x
+		sta pmg+$400,y
+		iny
+		inx
+		dec indexos
+		bpl zapis_uschlou_kytku_faze_3
+		
+		ldx #4
+		jsr big_wait
+		
+		ldy #$3e
+		lda #0
+		sta (zapisnik),y
+		iny
+		sta (zapisnik),y
+		ldy #$7e
+		lda #38+34
+		sta (zapisnik),y
+		iny
+		lda #39+34
+		sta (zapisnik),y
+
+		lda #11
+		sta indexos
+		ldx #0
+		lda panak_y
+		sec
+		sbc #13
+		tay
+zapis_uschlou_kytku_faze_4
+		lda uschla_kytka_faze_4,x
+		sta pmg+$400,y
+		iny
+		inx
+		dec indexos
+		bpl zapis_uschlou_kytku_faze_4
+		
+		ldx #4
+		jsr big_wait
+		
+		ldy #$3e
+		lda #0
+		sta (zapisnik),y
+		iny
+		sta (zapisnik),y
+		ldy #$7e
+		sta (zapisnik),y
+		iny
+		sta (zapisnik),y		
+		
+		lda panak_y
+		sec
+		sbc #13
+		tay
+		lda #0
+		ldx #11
+zapis_uschlou_kytku_faze_5
+		sta pmg+$400,y
+		iny
+		dex
+		bpl zapis_uschlou_kytku_faze_5
+		
+		rts
+		
+vypis_game_over
+		lda dlist_game_radek11
+		sta kam_psat_game_over_radek_11+1
+		lda dlist_game_radek11+1
+		sta kam_psat_game_over_radek_11+2
+		lda dlist_game_radek12
+		sta kam_psat_game_over_radek_12+1
+		lda dlist_game_radek12+1
+		sta kam_psat_game_over_radek_12+2
+		lda dlist_game_radek13
+		sta kam_psat_game_over_radek_13+1
+		lda dlist_game_radek13+1
+		sta kam_psat_game_over_radek_13+2
+		lda dlist_game_radek14
+		sta kam_psat_game_over_radek_14+1
+		lda dlist_game_radek14+1
+		sta kam_psat_game_over_radek_14+2
+		lda dlist_game_radek15
+		sta kam_psat_game_over_radek_15+1
+		lda dlist_game_radek15+1
+		sta kam_psat_game_over_radek_15+2
+		lda dlist_game_radek16
+		sta kam_psat_game_over_radek_16+1
+		lda dlist_game_radek16+1
+		sta kam_psat_game_over_radek_16+2
+		
+		ldx #6
+		lda #$80
+zapis_pmg_do_status_baru_pri_game_over
+		sta pmg+$500+219,x
+		sta pmg+$500+228,x
+		dex
+		bpl zapis_pmg_do_status_baru_pri_game_over
+
+		ldx #19
+		ldy #10+19
+vypis_napis_game_over
+		lda napis_game_over,x
+kam_psat_game_over_radek_13		
+		sta $ffff,y
+		lda napis_game_over+20,x
+kam_psat_game_over_radek_14		
+		sta $ffff,y
+		lda #0
+kam_psat_game_over_radek_11
+		sta $ffff,y
+kam_psat_game_over_radek_12		
+		sta $ffff,y
+kam_psat_game_over_radek_15		
+		sta $ffff,y
+kam_psat_game_over_radek_16		
+		sta $ffff,y
+		dey
+		dex
+		bpl vypis_napis_game_over
+		
+		lda #4
+		sta $d01b
+		sta 623
+		
+		lda #3
+		sta $d008
+		sta $d009
+		
+		lda #$60
+		sta $d000
+		lda #$80
+		sta $d001
+		sta muj_d001+1
+				
+		lda #0
+		sta $d012
+		sta $d013
+		sta 704
+		sta 705
+		
+		ldx #30
+		lda #$ff
+vykresli_ramecek_game_over		
+		sta pmg+$400+109,x
+		sta pmg+$500+109,x
+		dex		
+		bpl vykresli_ramecek_game_over
+		
+		lda #5
+		sta rychlost_rmt_hrani+1		
+		ldx #<rmt_gameover
+		ldy #>rmt_gameover
+		lda #0
+		jsr rmt_player		
+		
+cekej_na_smazani_napisu_game_over
+		lda 644
+		beq smaz_napis_game_over
+		lda $d01f
+		cmp #6
+		bne cekej_na_smazani_napisu_game_over
+
+smaz_napis_game_over
+		jsr wait
+		lda #0		
+		tax
+smaz_prvni_dve_stranky_fontu_s_ovocem_a_kytkama_a_truhlou
+		sta font_game,x
+		sta font_game+256,x
+		inx
+		bne smaz_prvni_dve_stranky_fontu_s_ovocem_a_kytkama_a_truhlou
+		
+		jsr smazani_predmetu
+		
+shod_napis_game_over_do_BW
+		lda 708
+		and #$f0
+		beq barva_708_uz_je_BW
+		lda 708
+		clc
+		adc #$10
+		sta 708
+barva_708_uz_je_BW		
+		lda 709
+		and #$f0
+		beq barva_709_uz_je_BW
+		lda 709
+		clc
+		adc #$10
+		sta 709
+barva_709_uz_je_BW
+		lda 711
+		and #$0f
+		beq barva_711_uz_je_BW
+		lda 711
+		clc
+		adc #$10
+		sta 711
+barva_711_uz_je_BW		
+		:2 jsr wait
+		lda 708
+		ora 709
+		ora 711
+		and #$f0
+		bne shod_napis_game_over_do_BW
+		
+		ldx #10
+		jsr big_wait
+		
+zhasni_napis_game_over
+		lda 708
+		beq barva_708_je_uz_nula
+		dec 708
+		dec 708		
+barva_708_je_uz_nula		
+		lda 709
+		beq barva_709_je_uz_nula
+		dec 709
+		dec 709
+barva_709_je_uz_nula
+		lda 711
+		beq barva_711_je_uz_nula		
+		dec 711
+		dec 711
+barva_711_je_uz_nula
+		:2 jsr wait
+		lda 708
+		ora 709
+		ora 711
+		bne zhasni_napis_game_over
+		
+cekej_pred_totalnim_game_over
+		lda $d40b
+		bne cekej_pred_totalnim_game_over
+		
+		lda #0
+		sta 559
+		sta $d400
+		sta $d008
+		sta $d009
+		rts	
+		
+vykresli_pmg_do_status_baru		
+		ldx #6		
+zapis_pmg_do_status_baru		
+		lda #$ff
+		sta pmg+$300+219+2,x
+		sta pmg+$300+228+2,x
+		lda #$f0
+		sta pmg+$500+219+2,x		
+		sta pmg+$600+219+2,x
+		sta pmg+$700+219+2,x
+		sta pmg+$500+228+2,x		
+		sta pmg+$600+228+2,x
+		sta pmg+$700+228+2,x
+		dex
+		bpl zapis_pmg_do_status_baru		
+		
+		lda #$62
+		sta $d004
+		lda #$7e
+		sta $d005
+		lda #$82
+		sta $d006
+		lda #$9e
+		sta $d007
+		rts	
+		
+akce_truhla
+		sty pozice_nalezene_truhly+1
+		lda rmt_mode
+		beq pust_efekt_truhly_do_kanalu0
+		lda #$24
+		sta rmt_efekt2
+		bne pusteni_efektu_truhly_vyreseno
+pust_efekt_truhly_do_kanalu0		
+		lda #$24
+		sta rmt_efekt
+pusteni_efektu_truhly_vyreseno		
+		lda #0
+		sta 704
+				
+		ldx #11
+pozice_nalezene_truhly		
+		ldy #$ff
+		lda animace_truhly,x
+		sta (zapisnik),y
+		iny
+		dex
+		lda animace_truhly,x
+		sta (zapisnik),y
+		tya
+		clc
+		adc #$3f
+		tay
+		dex
+		lda animace_truhly,x
+		sta (zapisnik),y
+		iny
+		dex
+		lda animace_truhly,x
+		sta (zapisnik),y		
+		jsr wait
+		jsr wait
+		dex
+		bpl pozice_nalezene_truhly	
+		
+pozice_pokladu
+		ldy #$ff
+		
+		lda #6
+		sta pmg+$400,y
+		sta pmg+$402,y
+		lda #15
+		sta pmg+$401,y		
+		
+		ldx #7
+blikni_s_pokladem_nahoru
+		lda 704
+		clc
+		adc #2
+		sta 704
+		jsr wait
+		dex
+		bne blikni_s_pokladem_nahoru
+		
+		ldx #7
+blikni_s_pokladem_dolu
+		lda 704
+		sec
+		sbc #2
+		sta 704
+		jsr wait
+		dex
+		bne blikni_s_pokladem_dolu
+		
+		lda #0
+		sta pmg+$400,y		
+		sta pmg+$401,y
+		sta pmg+$402,y
+		
+		sed		
+		
+		lda $d20a
+		bpl truhla_neobsahuje_sprej		
+		
+		lda sprejus
+		cmp #$99
+		beq obsah_truhly_vyresen
+		clc
+		adc #1
+		sta sprejus	
+		jsr vypis_spreje
+		
+		lda #6
+		sta blikator
+		lda #0
+		sta cekani_pri_bliknuti_ikonkou+1		
+		lda #<($02*8)
+		sta blikni_ikonkou+1
+		sta blikni_ikonkou+6
+		bne obsah_truhly_vyresen
+		
+truhla_neobsahuje_sprej
+		lda lives
+		cmp #$99
+		beq obsah_truhly_vyresen
+		clc
+		adc #1
+		sta lives
+		jsr vypis_lives
+		
+		lda #6
+		sta blikator
+		lda #0
+		sta cekani_pri_bliknuti_ikonkou+1		
+		lda #<($01*8)
+		sta blikni_ikonkou+1
+		sta blikni_ikonkou+6
+		;lda #0
+		;sta taken_lo
+		;sta taken_hi		
+
+obsah_truhly_vyresen
+		cld						
+		rts
+		
+jdi_s_panakem_doprava
+		ldy animator
+		ldx panak_indexy_animaci_v_ose_x,y
+		
+		lda #14
+		sta indexos		
+		ldy panak_y
+kresli_panaka_pri_pohybu_pryc_z_obrazu
+		lda panak_doprava_hrac_1,x
+		sta pmg+$500,y
+		lda panak_doprava_hrac_2,x
+		sta pmg+$600,y
+		lda panak_doprava_hrac_3,x
+		sta pmg+$700,y
+		dex
+		dey
+		dec indexos
+		bpl kresli_panaka_pri_pohybu_pryc_z_obrazu		
+		
+		ldx panak_x
+		inx
+		stx panak_x		
+		stx $d001
+		stx muj_d001+1
+		stx $d002
+		stx muj_d002+1
+		stx $d003
+		stx muj_d003+1
+		
+		:2 jsr wait
+		dec animator
+		bpl jdi_s_panakem_doprava
+		rts
+		
+zaverecna_vtipna_akce_pri_zkompletovani_levelu_99
+		jsr vykresli_pripraveneho_sviste
+		ldx #40
+		jsr big_wait
+
+odejdi_s_panakem_pryc_z_obrazu
+		lda #7
+		sta animator
+		jsr jdi_s_panakem_doprava
+		
+		lda panak_x
+		bne odejdi_s_panakem_pryc_z_obrazu
+		
+		lda #<dlist_congratulations
+		sta 560
+		sta $d402
+		lda #>dlist_congratulations
+		sta 561
+		sta $d403
+		lda #<dli_congratulations
+		sta 512
+		lda #>dli_congratulations
+		sta 513				
+		lda #>font_game
+		sta 756		
+		
+		lda #$a6
+		sta 710	
+		
+		lda #<screen_game+10*$40		
+		sta dlist_game_radek11
+		lda #>screen_game+10*$40
+		sta dlist_game_radek11+1	
+		
+		jsr smaz_pmg
+		
+		lda #0
+		tax
+smaz_screen_pro_gratulacni_obrazovku
+		sta screen_game,x
+		sta screen_game+$300,x
+		inx
+		bne smaz_screen_pro_gratulacni_obrazovku
+		
+		lda #4
+		sta panak_x		
+		lda #$82
+		sta panak_y
+		
+prijdi_s_panakem_na_stred_obrazu
+		lda #7
+		sta animator
+		jsr jdi_s_panakem_doprava
+		
+		lda panak_x
+		cmp #$78+4
+		bne prijdi_s_panakem_na_stred_obrazu
+		
+		jsr vykresli_pripraveneho_sviste
+		ldx #20
+		jsr big_wait
+		lda #0
+		sta mavac
+		lda #$0b
+		sta counter
+animuj_posledni_zamavani		
+		jsr vykresli_mavajiciho_sviste
+		dec counter
+		bpl animuj_posledni_zamavani
+		ldx #20
+		jsr big_wait
+		jsr vykresli_horiciho_sviste
+		
+		lda #$e0
+		sta 710
+		lda #0
+		sta $d000
+		lda #2
+		sta $d404		
+		lda #>status_bar_font
+		sta 756
+		
+		ldx #21
+zkopiruj_napis_congratulations
+		lda screen_congratulations,x
+		sta screen_game+5,x
+		lda screen_congratulations+22,x
+		sta screen_game+37,x
+		dex
+		bpl zkopiruj_napis_congratulations		
+		
+		lda #5
+		sta rychlost_rmt_hrani+1		
+		ldx #<rmt_congratulations
+		ldy #>rmt_congratulations
+		lda #0
+		jsr rmt_player		
+		
+zobraz_barvy_napisu_congratulations
+		lda #0 ; flag, zda jsou vsechny barvy OK
+		sta counter
+		lda 708
+		beq barva_708_uz_je_0
+		lda 708
+		clc
+		adc #$10
+		sta 708
+		inc counter
+barva_708_uz_je_0
+		lda 709
+		cmp #$30
+		beq barva_709_uz_je_30
+		lda 709
+		clc
+		adc #$10
+		sta 709
+		inc counter
+barva_709_uz_je_30
+		lda 710
+		cmp #$50
+		beq barva_710_uz_je_50
+		lda 710
+		clc
+		adc #$10
+		sta 710
+		inc counter
+barva_710_uz_je_50
+		:2 jsr wait
+		lda counter
+		bne zobraz_barvy_napisu_congratulations
+		
+zobraz_barvy_napisu_congratulations_II
+		lda #0 ; flag, zda jsou vsechny barvy OK
+		sta counter
+		lda 708
+		cmp #$0e
+		beq barva_708_uz_je_0e
+		inc 708
+		inc 708
+		inc counter
+barva_708_uz_je_0e
+		lda 709
+		cmp #$34
+		beq barva_709_uz_je_34
+		inc 709
+		inc 709
+		inc counter
+barva_709_uz_je_34
+		lda 710
+		cmp #$56
+		beq barva_710_uz_je_56
+		inc 710
+		inc 710
+		inc counter
+barva_710_uz_je_56
+		:2 jsr wait
+		lda counter
+		bne zobraz_barvy_napisu_congratulations_II		
+		
+		ldx #0
+pis_napis_completed_cast_prvni
+		lda napis_completed_cast_prvni,x
+		lsr @
+		sta screen_game+$40,x
+		:2 jsr wait
+		inx
+		cpx #32
+		bne pis_napis_completed_cast_prvni
+		
+		ldx #0
+pis_napis_completed_cast_druha
+		lda napis_completed_cast_druha,x
+		lsr @
+		sta screen_game+$64,x
+		:2 jsr wait
+		inx
+		cpx #31
+		bne pis_napis_completed_cast_druha
+		
+cekej_na_smazani_napisu_congratulations
+		lda 644
+		beq smaz_barvy_napisu_congratulations_II
+		lda $d01f
+		cmp #6
+		bne cekej_na_smazani_napisu_congratulations
+		
+smaz_barvy_napisu_congratulations_II
+		lda #0 ; flag, zda jsou vsechny barvy OK
+		sta counter
+		lda 708		
+		beq barva_708_uz_je_0_II
+		dec 708
+		dec 708
+		inc counter
+barva_708_uz_je_0_II
+		lda 709
+		cmp #$30
+		beq barva_709_uz_je_30_II
+		dec 709
+		dec 709
+		inc counter
+barva_709_uz_je_30_II
+		lda 710
+		cmp #$50
+		beq barva_710_uz_je_50_II
+		dec 710
+		dec 710
+		inc counter
+barva_710_uz_je_50_II
+		:2 jsr wait
+		lda counter
+		bne smaz_barvy_napisu_congratulations_II
+		
+smaz_barvy_napisu_congratulations
+		lda #0 ; flag, zda jsou vsechny barvy OK
+		sta counter
+		lda 708
+		cmp #$e0
+		beq barva_708_uz_je_e0
+		lda 708
+		sec
+		sbc #$10
+		sta 708
+		inc counter
+barva_708_uz_je_e0
+		lda 709
+		cmp #$e0
+		beq barva_709_uz_je_e0
+		lda 709
+		sec
+		sbc #$10
+		sta 709
+		inc counter
+barva_709_uz_je_e0
+		lda 710
+		cmp #$e0
+		beq barva_710_uz_je_e0
+		lda 710
+		sec
+		sbc #$10
+		sta 710
+		inc counter
+barva_710_uz_je_e0
+		:2 jsr wait
+		lda counter
+		bne smaz_barvy_napisu_congratulations
+		
+		rts
+		
+posun_obrazem_nahoru ; v Y je o kolik radku se pohnout
+		;ldy #12
+posun_obrazem_nahoru_o_dalsi_radek
+		ldx #7
+posunuj_obrazem_nahoru
+		lda vertikalnik
+		bne vertikalnik_pri_pohybu_obrazem_nahoru_neni_0
+		lda dlist_game_radek1+1 ; jsme uplne nahore?
+		cmp #>screen_game
+		bne ne_nejsme_uplne_nahore_pri_pohybu_obrazem_nahoru
+		lda dlist_game_radek1 ; jsme uplne nahore?
+		cmp #$40		
+		bcs ne_nejsme_uplne_nahore_pri_pohybu_obrazem_nahoru
+		rts
+ne_nejsme_uplne_nahore_pri_pohybu_obrazem_nahoru
+		lda #6
+		sta vertikalnik
+		sta $d405
+		lda #$40
+		sta citanka
+		jsr obraz_nahoru
+		jmp posun_obrazem_nahoru_vyresen
+vertikalnik_pri_pohybu_obrazem_nahoru_neni_0
+		sec
+		sbc #2
+		sta vertikalnik
+		sta $d405
+posun_obrazem_nahoru_vyresen
+		txa
+		lsr @
+		bcc necekej_pri_posunu_obrazem_nahoru
+		jsr wait
+necekej_pri_posunu_obrazem_nahoru		
+		dex
+		bpl posunuj_obrazem_nahoru
+		dey
+		bpl posun_obrazem_nahoru_o_dalsi_radek
+		rts
+		
+posun_obrazem_dolu ; v Y je o kolik radku se pohnout
+		;ldy #12
+posun_obrazem_dolu_o_dalsi_radek
+		ldx #7
+posunuj_obrazem_dolu
+		lda vertikalnik
+		beq vertikalnik_pri_pohybu_obrazem_dolu_je_0
+		cmp #6
+		bne vertikalnik_pri_pohybu_obrazem_dolu_neni_7
+		lda #0
+		sta vertikalnik
+		sta $d405
+		lda #$40
+		sta citanka
+		jsr obraz_dolu
+		jmp posun_obrazem_dolu_vyresen
+vertikalnik_pri_pohybu_obrazem_dolu_je_0
+		lda dlist_game_radek24+1 ; jsme uplne dole?
+		cmp #>screen_game+$c00
+		bne ne_nejsme_uplne_dole_pri_pohybu_obrazem_dolu
+		lda dlist_game_radek24
+		cmp #$40
+		bcc ne_nejsme_uplne_dole_pri_pohybu_obrazem_dolu
+		rts
+ne_nejsme_uplne_dole_pri_pohybu_obrazem_dolu
+		lda vertikalnik
+vertikalnik_pri_pohybu_obrazem_dolu_neni_7
+		clc
+		adc #2
+		sta vertikalnik
+		sta $d405
+posun_obrazem_dolu_vyresen
+		txa
+		lsr @
+		bcc necekej_pri_posunu_obrazem_dolu
+		jsr wait
+necekej_pri_posunu_obrazem_dolu		
+		dex
+		bpl posunuj_obrazem_dolu		
+		dey
+		bpl posun_obrazem_dolu_o_dalsi_radek
+		rts		
+		
+posun_obrazem_doleva ; v Y je o kolik sloupcu se pohnout
+		;ldy #10
+posun_obrazem_doleva_o_dalsi_sloupec
+		ldx #7
+posunuj_obrazem_doleva
+		lda horizontalnik
+		beq horizontalnik_pri_pohybu_obrazem_doleva_je_0
+		cmp #3
+		bne horizontalnik_pri_pohybu_obrazem_doleva_neni_3
+		lda #0
+		sta horizontalnik
+		sta $d404
+		sta muj_d404+1
+		lda #1
+		sta citanka
+		jsr obraz_nahoru
+		jmp posun_obrazem_doleva_vyresen
+horizontalnik_pri_pohybu_obrazem_doleva_je_0
+		lda dlist_game_radek1 ; jsme uplne vlevo?
+		and #$1f
+		bne ne_nejsme_uplne_vlevo_pri_pohybu_obrazem_doleva
+		rts
+ne_nejsme_uplne_vlevo_pri_pohybu_obrazem_doleva		
+		lda horizontalnik
+horizontalnik_pri_pohybu_obrazem_doleva_neni_3
+		clc
+		adc #1
+		sta horizontalnik
+		sta $d404		
+		sta muj_d404+1
+posun_obrazem_doleva_vyresen
+		txa
+		lsr @
+		bcc necekej_pri_posunu_obrazem_doleva
+		jsr wait
+necekej_pri_posunu_obrazem_doleva		
+		dex
+		bpl posunuj_obrazem_doleva
+		dey
+		bpl posun_obrazem_doleva_o_dalsi_sloupec
+		rts
+		
+posun_obrazem_doprava ; v Y je o kolik sloupcu se pohnout
+		;ldy #10
+posun_obrazem_doprava_o_dalsi_sloupec
+		ldx #7
+posunuj_obrazem_doprava
+		lda horizontalnik
+		bne horizontalnik_pri_pohybu_obrazem_doprava_neni_0
+		lda dlist_game_radek1 ; jsme uplne vpravo?
+		and #$1f
+		cmp #$1c
+		bne ne_nejsme_uplne_vpravo_pri_pohybu_obrazem_doprava
+		rts
+ne_nejsme_uplne_vpravo_pri_pohybu_obrazem_doprava		
+		lda #3
+		sta horizontalnik
+		sta $d404
+		sta muj_d404+1
+		lda #1
+		sta citanka
+		jsr obraz_dolu
+		jmp posun_obrazem_doprava_vyresen
+horizontalnik_pri_pohybu_obrazem_doprava_neni_0
+		sec
+		sbc #1
+		sta horizontalnik
+		sta $d404
+		sta muj_d404+1
+posun_obrazem_doprava_vyresen
+		txa
+		lsr @
+		bcc necekej_pri_posunu_obrazem_doprava
+		jsr wait
+necekej_pri_posunu_obrazem_doprava		
+		dex
+		bpl posunuj_obrazem_doprava
+		dey
+		bpl posun_obrazem_doprava_o_dalsi_sloupec
+		rts		
+		
+selecton
+		dta $00
+optionak
+		dta $00
+option
+		dta $00
+				
+		; hovno
+				
+main_vbi
+		lda #0
+		sta 77 ; attract				
+		lda 560
+		cmp #<dlist_title
+		beq option_vyresen
+		lda $d01f
+		cmp #5
+		bne nemacka_select
+		ldx #<rmt_track_1 ; kdyz chce jit pouze do sfx, tak mu je nabidneme vzdy z tracku 1, on to stejne nepozna
+		ldy #>rmt_track_1
+		lda #$0d
+		sta rmt_mode ; pouze sfx
+		jsr rmt_player		
+nemacka_select
+		lda option
+		beq muze_zmacknout_option
+		lda $d01f ; drzi dal option?
+		cmp #3
+		beq option_vyresen
+		dec option
+		jmp option_vyresen		
+muze_zmacknout_option		
+		lda $d01f
+		cmp #3
+		bne option_vyresen
+		lda rmt_mode ; hraje hudba?
+		beq option_vyresen
+		lda #3
+		sta option
+		
+		ldx pisnickar	
+		lda ingame_hudby_rychlosti,x
+		sta rychlost_rmt_hrani+1
+		lda ingame_hudby_pointery_lo,x		
+		ldy ingame_hudby_pointery_hi,x
+		tax
+		lda #0
+		sta rmt_mode
+		jsr rmt_player		
+option_vyresen
+		lda $d014 ; NTSC nebo PAL?
+		and #14
+		beq hrajte_pane
+		inc ntsc
+		lda ntsc
+		cmp #6
+		bne hrajte_pane
+		lda #0
+		sta ntsc
+		beq main_vbi_end
+hrajte_pane
+		lda rmt_flag
+		beq main_vbi_end
+		lda rmt_efekt
+		bmi neni_novy_rmt_sfx
+		asl @ 
+		tay	
+		ldx #0 ; kanal
+		lda #12
+		jsr rmt_player+15
+		lda #$ff
+		sta rmt_efekt		
+neni_novy_rmt_sfx
+		lda rmt_efekt2
+		bmi neni_novy_rmt_sfx2
+		asl @ 
+		tay	
+		ldx #1 ; kanal
+		lda #12
+		jsr rmt_player+15
+		lda #$ff
+		sta rmt_efekt2
+neni_novy_rmt_sfx2
+		lda 560
+		cmp #<dlist_title
+		bne nehraje_title_song 		
+		jsr rmt_player_stereo+3
+		jmp main_vbi_end
+nehraje_title_song 		
+		jsr rmt_player+3		
+
+main_vbi_end
+		rts
+		;jmp $e462
+		
+napis_completed_cast_prvni
+		;dta d"YOU'VE COMPLETED ALL GARDENS BUT"		
+		dta $72,$5E,$6A,$0E,$6C,$4A,$00,$46,$5E,$5A,$60,$58,$4A,$68,$4A,$48
+		dta $00,$42,$58,$58,$00,$4E,$42,$64,$48,$4A,$5C,$66,$00,$44,$6A,$68		
+napis_completed_cast_druha
+		;dta d"PETE GOT SICK OF SO MUCH FRUIT."
+		dta $60,$4A,$68,$4A,$00,$4E,$5E,$68,$00,$66,$52,$46,$56,$00,$5E,$4C
+		dta $00,$66,$5E,$00,$5A,$6A,$46,$50,$00,$4C,$64,$6A,$52,$68,$1C
+animace_odlesku_indexy
+		dta 0,5,10,15,10,5
+		
+animace_odlesku_data
+		dta 0 
+		dta 0
+		dta %11110111
+		dta %11110111
+		dta %11110111
+		
+		dta 0 
+		dta 0
+		dta %11111111
+		dta %11110111
+		dta %11110111
+		
+		dta 0 
+		dta %00000100
+		dta %11011101
+		dta %11110111
+		dta %11111111
+		
+		dta %00000100
+		dta %00000100
+		dta %11011101
+		dta %11110111
+		dta %11110111
+		
+animace_truhly
+		dta $a6+20,$a5+20,$a8+20,$a7+20
+		dta $a6+20,$a5+20,$a4+20,$a3+20
+		dta $a2+20,$a1+20,$a0+20,$9f+20
+		
+napis_game_over
+		dta 0,0,0,50+128+34,51+128+34,54+128+34,55+128+34,58+128+34,59+128+34,62+128+34,63+128+34,66+128+34,67+128+34,70+128+34,71+128+34,74+128+34,75+128+34,0,0,0
+		dta 0,0,0,52+128+34,53+128+34,56+128+34,57+128+34,60+128+34,61+128+34,64+128+34,65+128+34,68+128+34,69+128+34,72+128+34,73+128+34,76+128+34,77+128+34,78+128+34,0,0
+		
+mavajici_pete_indexy_animaci
+		dta 0*17,2*17,3*17,4*17,3*17,4*17,3*17,2*17,1*17,0*17,0*17,0*17
+		
+horici_pete_znaky	
+		dta 0,0,0,0
+		dta 0,0,0,0
+		dta 0,0,48+34,49+34
+		dta 44+34,45+34,46+34,47+34
+		dta 40+34,41+34,42+34,43+34
+		
+barva_levelu_708 ; svetlejsi barva ovoce		
+		dta $38 ; level .0
+		dta $1c ; level .1			
+		dta $e8 ; level .2
+		dta $38 ; level .3
+		dta $28 ; level .4
+		dta $48 ; level .5
+		dta $28 ; level .6
+		dta $7a ; level .7
+		dta $ca ; level .8
+		dta $1a	; level .9		
+		
+barva_levelu_709 ; tmavsi barva ovoce				
+		dta $24 ; level .0
+		dta $18 ; level .1
+		dta $f4 ; level .2
+		dta $14 ; level .3
+		dta $34 ; level .4
+		dta $32 ; level .5
+		dta $14 ; level .6
+		dta $74 ; level .7		
+		dta $f4 ; level .8
+		dta $34 ; level .9		
+		
+barva_levelu_711 ; barva kytky
+		dta $1c ; level .0
+		dta $46 ; level .1
+		dta $76 ; level .2
+		dta $74 ; level .3
+		dta $0c ; level .4
+		dta $1a ; level .5
+		dta $86 ; level .6
+		dta $34 ; level .7
+		dta $76 ; level .8
+		dta $ba ; level .9		
+		
+desitky_pro_prevod
+		dta 0,10,20,30,40,50,60,70,80,90		
+		
+dlist_prepocet ; slouzi k nalezeni aktualni LMS v display listu podle zjisteneho radku pozice panaka
+		dta 0,6,12,18,24,30,36,42,48,54,60,66
+		
+		;dta 14+15,14+15 ; klid
+		;dta 14+15+15,14+15+15 ; rozkrok 2
+		;dta 14+15,14+15 ; klid
+		;dta 14,14 ; rozkrok 1
+	
+panak_indexy_animaci_v_ose_x
+		;dta 14+15,14+15,14+15+15,14+15+15,14+15,14+15,14,14
+		dta 14+15,14+15,14+15,14+15
+		dta 14+15+15,14+15+15,14+15+15,14+15+15
+		dta 14+15,14+15,14+15,14+15
+		dta 14,14,14,14		
+panak_indexy_animaci_v_ose_y
+		dta 16+17,16+17,16+17,16+17
+		dta 16+17+17,16+17+17,16+17+17,16+17+17
+		dta 16+17,16+17,16+17,16+17
+		dta 16,16,16,16
+		
+panak_doleva_hrac_1 ; cerna barva
+		dta %00000000 ; faze 1
+		dta %01111100
+		dta %00011110
+		dta %00001110
+		dta %00101010
+		dta %00000010
+		dta %00000010
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00100001
+		dta %00010010
+		
+		dta %00111100 ; faze 2
+		dta %01011110
+		dta %00001110
+		dta %00101010
+		dta %00000010
+		dta %00000010
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00001100
+		
+		dta %00000000 ; faze 3
+		dta %01111100
+		dta %00011110
+		dta %00001110
+		dta %00101010
+		dta %00000010
+		dta %00000010
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00100001
+		dta %00010010
+		
+panak_doleva_hrac_2 ; ruzova barva
+		dta %00000000 ; faze 1
+		dta %00000000
+		dta %00100000
+		dta %00110000
+		dta %00010100
+		dta %00111100
+		dta %00111100
+		dta %00011100
+		dta %00001100
+		dta %00001100
+		dta %00001100
+		dta %00001010
+		dta %00010000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 2
+		dta %00100000
+		dta %00110000
+		dta %00010100
+		dta %00111100
+		dta %00111100
+		dta %00011100
+		dta %00001100
+		dta %00001100
+		dta %00001100
+		dta %00001000
+		dta %00001000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 3
+		dta %00000000
+		dta %00100000
+		dta %00110000
+		dta %00010100
+		dta %00111100
+		dta %00111100
+		dta %00011100
+		dta %00001100
+		dta %00001100
+		dta %00001100
+		dta %00010100
+		dta %00000010
+		dta %00000000
+		dta %00000000
+		
+panak_doleva_hrac_3 ; tmave modra barva
+		dta %00000000 ; faze 1
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000100
+		dta %00001100
+		dta %00001100
+		dta %00001100
+		dta %00001100
+		dta %00010110
+		dta %00000000
+		
+		dta %00000000 ; faze 2
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000100
+		dta %00001100
+		dta %00001100
+		dta %00001100
+		dta %00000100
+		dta %00001100
+		dta %00001100
+		dta %00000000
+		
+		dta %00000000 ; faze 3
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000100
+		dta %00001100
+		dta %00001100
+		dta %00001100
+		dta %00001100
+		dta %00010110
+		dta %00000000
+		
+panak_doprava_hrac_1 ; cerna barva
+		dta %00000000 ; faze 1
+		dta %00111110
+		dta %01111000
+		dta %01110000
+		dta %01010100
+		dta %01000000
+		dta %01000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %10000100
+		dta %01001000
+		
+		dta %00111100 ; faze 2
+		dta %01111010
+		dta %01110000
+		dta %01010100
+		dta %01000000
+		dta %01000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00110000
+		
+		dta %00000000 ; faze 3
+		dta %00111110
+		dta %01111000
+		dta %01110000
+		dta %01010100
+		dta %01000000
+		dta %01000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %10000100
+		dta %01001000
+		
+panak_doprava_hrac_2 ; ruzova barva
+		dta %00000000 ; faze 1
+		dta %00000000
+		dta %00000100
+		dta %00001100
+		dta %00101000
+		dta %00111100
+		dta %00111100
+		dta %00111000
+		dta %00110000
+		dta %00110000
+		dta %00110000
+		dta %01010000
+		dta %00001000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 2
+		dta %00000100
+		dta %00001100
+		dta %00101000
+		dta %00111100
+		dta %00111100
+		dta %00111000
+		dta %00110000
+		dta %00110000
+		dta %00110000
+		dta %00010000
+		dta %00010000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 3
+		dta %00000000
+		dta %00000100
+		dta %00001100
+		dta %00101000
+		dta %00111100
+		dta %00111100
+		dta %00111000
+		dta %00110000
+		dta %00110000
+		dta %00110000
+		dta %00101000
+		dta %01000000
+		dta %00000000
+		dta %00000000
+		
+panak_doprava_hrac_3 ; tmave modra barva
+		dta %00000000 ; faze 1
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00100000
+		dta %00110000
+		dta %00110000
+		dta %00110000
+		dta %00110000
+		dta %01101000
+		dta %00000000
+		
+		dta %00000000 ; faze 2
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00100000
+		dta %00110000
+		dta %00110000
+		dta %00110000
+		dta %00100000
+		dta %00110000
+		dta %00110000
+		dta %00000000
+		
+		dta %00000000 ; faze 3
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00100000
+		dta %00110000
+		dta %00110000
+		dta %00110000
+		dta %00110000
+		dta %01101000
+		dta %00000000		
+		
+panak_dolu_hrac_1 ; cerna barva
+		dta %00000000 ; faze 1
+		dta %00000000
+		dta %00000000
+		dta %00111100
+		dta %01111110
+		dta %01010110
+		dta %01000010
+		dta %01100110
+		dta %01000010
+		dta %00011000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00001000
+		dta %00010000
+		
+		dta %00000000 ; faze 2
+		dta %00000000
+		dta %00111100
+		dta %01111110
+		dta %01001110
+		dta %01000010
+		dta %01100110
+		dta %01000010
+		dta %00011000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00011000
+		
+		dta %00000000 ; faze 3
+		dta %00000000
+		dta %00000000
+		dta %00111100
+		dta %01111110
+		dta %01010110
+		dta %01000010
+		dta %01100110
+		dta %01000010
+		dta %00011000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00010000
+		dta %00001000
+		
+panak_dolu_hrac_2 ; ruzova barva
+		dta %00000000 ; faze 1
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00101000
+		dta %00111100
+		dta %00011000
+		dta %00111100
+		dta %00100100
+		dta %00011000
+		dta %00011000
+		dta %00111100
+		dta %00100100
+		dta %00000100
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 2
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00110000
+		dta %00111100
+		dta %00011000
+		dta %00111100
+		dta %00100100
+		dta %00011000
+		dta %00011000
+		dta %00111100
+		dta %00100100
+		dta %00100100
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 3
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00101000
+		dta %00111100
+		dta %00011000
+		dta %00111100
+		dta %00100100
+		dta %00011000
+		dta %00011000
+		dta %00111100
+		dta %00100100
+		dta %00100000
+		dta %00000000
+		dta %00000000
+				
+panak_dolu_hrac_3 ; tmave modra barva
+		dta %00000000 ; faze 1
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00011000
+		dta %00111100
+		dta %00011100
+		dta %00011000
+		dta %00010000
+		dta %00000000
+		
+		dta %00000000 ; faze 2
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00011000
+		dta %00111100
+		dta %00111100
+		dta %00011000
+		dta %00011000
+		dta %00011000
+		dta %00000000
+		
+		dta %00000000 ; faze 3
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00011000
+		dta %00111100
+		dta %00111000
+		dta %00011000
+		dta %00001000
+		dta %00000000
+		
+panak_nahoru_hrac_1 ; cerna barva
+		dta %00000000 ; faze 1
+		dta %00111100
+		dta %01111110
+		dta %01111110
+		dta %01111110
+		dta %01111110
+		dta %01111110
+		dta %00111100
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00001000
+		dta %00010000
+		dta %00000000
+		dta %00000000		
+		
+		dta %00111100 ; faze 2
+		dta %01111110
+		dta %01111110
+		dta %01111110
+		dta %01111110
+		dta %01111110
+		dta %00111100
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00011000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 3
+		dta %00111100
+		dta %01111110
+		dta %01111110
+		dta %01111110
+		dta %01111110
+		dta %01111110
+		dta %00111100
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00010000
+		dta %00001000
+		dta %00000000
+		dta %00000000		
+		
+panak_nahoru_hrac_2 ; ruzova barva
+		dta %00000000 ; faze 1
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00011000
+		dta %00011000
+		dta %00111100
+		dta %00111100
+		dta %00000100
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 2
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00011000
+		dta %00011000
+		dta %00111100
+		dta %00111100
+		dta %00111100
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 3
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00011000
+		dta %00011000
+		dta %00111100
+		dta %00111100
+		dta %00100000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+				
+panak_nahoru_hrac_3 ; tmave modra barva
+		dta %00000000 ; faze 1		
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00011000
+		dta %00111100
+		dta %00011100
+		dta %00011000
+		dta %00010000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 2		
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00011000
+		dta %00111100
+		dta %00111100
+		dta %00011000
+		dta %00011000
+		dta %00011000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 3		
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00011000
+		dta %00111100
+		dta %00111000
+		dta %00011000
+		dta %00001000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+panak_mavajici_hrac_1 ; cerna
+		dta %00000000
+		dta %00000000
+		dta %00111100
+		dta %01111110
+		dta %01001110
+		dta %01000010
+		dta %01100110
+		dta %01000010
+		dta %00011000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00011000		
+panak_mavajici_hrac_2 ; ruzova
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00110000
+		dta %00111100
+		dta %00011000
+		dta %00111100
+		dta %00100100
+		dta %01011000
+		dta %01011000
+		dta %00111100
+		dta %00000100
+		dta %00000100
+		dta %00000000
+		dta %00000000
+		dta %00000000
+panak_mavajici_hrac_3 ; tmave modra
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %01011000
+		dta %00111100
+		dta %00011100
+		dta %00011000
+		dta %00011000
+		dta %00011000
+		dta %00000000	
+		
+panak_levy_strik_hrac_2
+		dta %00000000 ; ruzova
+		dta %00100000
+		dta %00110000
+		dta %00010100
+		dta %00111100
+		dta %00111100
+		dta %00011100
+		dta %00001100
+		dta %00101100
+		dta %00101100
+		dta %00011000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000	
+		
+panak_levy_strik_hrac_3		
+		dta %00000000 ; tmave modra
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000100
+		dta %00001100
+		dta %00001100
+		dta %00011100
+		dta %00001100
+		dta %00001100
+		dta %00001100
+		dta %00000000
+		
+panak_pravy_strik_hrac_2		
+		dta %00000000 ; ruzova
+		dta %00000100
+		dta %00001100
+		dta %00101000
+		dta %00111100
+		dta %00111100
+		dta %00111000
+		dta %00110000
+		dta %00110100
+		dta %00110100
+		dta %00011000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+panak_pravy_strik_hrac_3				
+		dta %00000000 ; tmave modra
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00100000
+		dta %00110000
+		dta %00110000
+		dta %00111000
+		dta %00110000
+		dta %00110000
+		dta %00110000
+		dta %00000000
+		
+panak_dolni_strik_hrac_2
+		dta %00000000 ; ruzova barva
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00110000
+		dta %00111100
+		dta %00011000
+		dta %00111100
+		dta %00100100
+		dta %00011000
+		dta %00011100
+		dta %00111100
+		dta %00100100
+		dta %00100000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+
+panak_dolni_strik_hrac_3		
+		dta %00000000 ; tmave modra
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00011100
+		dta %00111000
+		dta %00111000
+		dta %00011000
+		dta %00011000
+		dta %00011000
+		dta %00000000	
+		
+panak_horni_strik_hrac_2
+		dta %00000000 ; ruzova barva
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00111000
+		dta %00111000
+		dta %00111100
+		dta %00111100
+		dta %00011100
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+
+panak_horni_strik_hrac_3		
+		dta %00000000 ; tmave modra
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00100000
+		dta %00111000
+		dta %00111100
+		dta %00111100
+		dta %00011000
+		dta %00011000
+		dta %00011000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+uschla_kytka_faze_1
+		dta %00011000
+		dta %01100110
+		dta %01000010
+		dta %10100101
+		dta %01111110
+		dta %11011011
+		dta %01011010
+		dta %00000000	
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+uschla_kytka_faze_2
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00010000
+		dta %00100100
+		dta %01000000
+		dta %01001000
+		dta %01001000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000		
+uschla_kytka_faze_3
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00001000
+		dta %00101000
+		dta %00101000
+		dta %00100000
+		dta %00000000
+uschla_kytka_faze_4
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00001000
+		dta %00100000
+		dta %00010000
+		
+horici_pete_hrac_0	; ruzova
+
+		dta %00000000 ; faze 1
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000	
+		dta %00000000
+		dta %00011000
+		dta %00111100
+		dta %00100100
+		dta %00100100
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 2
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000	
+		dta %00000000
+		dta %00011000
+		dta %00111100
+		dta %00100100
+		dta %00100100
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 3
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000	
+		dta %00000000
+		dta %00000000
+		dta %00011000
+		dta %01111110
+		dta %00100100
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 4
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000	
+		dta %00000000
+		dta %00000000
+		dta %01000010
+		dta %01011010
+		dta %00111100
+		dta %00111100
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 5
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %01000010
+		dta %01000010
+		dta %00111100
+		dta %00111100
+		dta %00011000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 6
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00100100
+		dta %00011000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 7
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00100100
+		dta %00100100
+		dta %00011000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 8
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000100
+		dta %00100100
+		dta %00011000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 9
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000100
+		dta %00100100
+		dta %00010000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 10
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 11
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 12
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+horici_pete_hrac_1 ; tmave modra
+
+		dta %00000000 ; faze 1
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000	
+		dta %00000000
+		dta %00011000
+		dta %00111100
+		dta %00111100
+		dta %00011000
+		dta %00011000
+		dta %00011000
+		dta %00000000
+		
+		dta %00000000 ; faze 2
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000	
+		dta %00000000
+		dta %00011000
+		dta %00111100
+		dta %00111100
+		dta %00011000
+		dta %00011000
+		dta %00011000
+		dta %00000000
+		
+		dta %00000000 ; faze 3
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000	
+		dta %00000000
+		dta %00000000
+		dta %00011000
+		dta %00111100
+		dta %00111100
+		dta %00011000
+		dta %00011000
+		dta %00000000
+		
+		dta %00000000 ; faze 4
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000	
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %01011010
+		dta %00111100
+		dta %00111100
+		dta %00011000
+		dta %00011000
+		
+		dta %00000000 ; faze 5
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %01000010
+		dta %01000010
+		dta %00111100
+		dta %00111100
+		dta %00011000
+		dta %00011000
+		dta %00011000
+		
+		dta %00000000 ; faze 6
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00100100
+		dta %00011000
+		dta %00011000
+		dta %00011000
+		
+		dta %00000000 ; faze 7
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00100100
+		dta %00100100
+		dta %00011000
+		dta %00011000
+		dta %00011000
+		
+		dta %00000000 ; faze 8
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000100
+		dta %00100100
+		dta %00011000
+		dta %00011000
+		dta %00011000
+		
+		dta %00000000 ; faze 9
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000100
+		dta %00100100
+		dta %00010000
+		dta %00010000
+		dta %00011000
+		
+		dta %00000000 ; faze 10
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 11
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 12
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+horici_pete_hrac_2	
+		
+		; fialova barva
+		
+		dta %00000000 ; faze 1
+		dta %00000000
+		dta %00000000
+		dta %00110000
+		dta %00111100
+		dta %00011000
+		dta %00111100
+		dta %00100100
+		dta %00011000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 2
+		dta %00000000
+		dta %00000000
+		dta %00110000
+		dta %00011000
+		dta %00011000
+		dta %00111100
+		dta %00110100
+		dta %00001000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 3
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00110000
+		dta %00011000
+		dta %00011000
+		dta %00111100
+		dta %00101100
+		dta %00010000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 4
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00110000
+		dta %00011000
+		dta %00011000
+		dta %00111100
+		dta %00110100
+		dta %00001000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 5
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %01000010
+		dta %01110010
+		dta %01011010
+		dta %01011010
+		dta %01111110
+		dta %00101100
+		dta %00110100
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 6
+		dta %00000000
+		dta %00000000
+		dta %01000110
+		dta %11110011
+		dta %11111011
+		dta %11111111
+		dta %11011111
+		dta %11111111
+		dta %11110111
+		dta %01101110
+		dta %01111110
+		dta %00011000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 7
+		dta %00000000
+		dta %00000000
+		dta %01000110
+		dta %11110011
+		dta %11111011
+		dta %11111111
+		dta %11011111
+		dta %11111111
+		dta %11101111
+		dta %01110110
+		dta %01011010
+		dta %00011000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %10000000 ; faze 8
+		dta %10010001
+		dta %01000010
+		dta %01010110
+		dta %11110111
+		dta %11111001
+		dta %11111101
+		dta %11010111
+		dta %11111111
+		dta %10110111
+		dta %01001111
+		dta %01011111
+		dta %10011010
+		dta %10100001
+		dta %00000010
+		dta %00000010
+		
+		dta %00000000 ; faze 9
+		dta %00000000
+		dta %00000000
+		dta %01010000
+		dta %00010000
+		dta %01010000
+		dta %11111100
+		dta %11010111
+		dta %11111111
+		dta %10110111
+		dta %11001111
+		dta %01011010
+		dta %10011010
+		dta %11101011
+		dta %01001010
+		dta %11100011
+		
+		dta %00000000 ; faze 10
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %10011100
+		dta %10111101
+		dta %11111011
+		dta %11011110
+		dta %11111111
+		
+		dta %00000000 ; faze 11
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00010100
+		dta %01111110
+		
+		dta %00000000 ; faze 12
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00101000		
+		
+horici_pete_hrac_3	; cerna barva
+		
+		dta %00000000 ; faze 1
+		dta %00111100
+		dta %01111110
+		dta %01001110
+		dta %01000010
+		dta %01100110
+		dta %01000010
+		dta %00011000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00011000
+		
+		dta %00000000 ; faze 2
+		dta %00111100
+		dta %01111110
+		dta %01001110
+		dta %01100110
+		dta %01100110
+		dta %01000010
+		dta %00001000
+		dta %00010000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00011000
+		
+		dta %00000000 ; faze 3
+		dta %00000000
+		dta %00111100
+		dta %01111110
+		dta %01001110
+		dta %01100110
+		dta %01100110
+		dta %01000010
+		dta %00010000
+		dta %00001000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00011000
+		
+		dta %00000000 ; faze 4
+		dta %00000000
+		dta %00111100
+		dta %00111100
+		dta %01111110
+		dta %01001110
+		dta %01100110
+		dta %01100110
+		dta %01000010
+		dta %00001000
+		dta %00010000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 5
+		dta %00111100
+		dta %01111110
+		dta %01111110
+		dta %10111101
+		dta %10001101
+		dta %10100101
+		dta %10100101
+		dta %10000001
+		dta %00010000
+		dta %00001000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00111100 ; faze 6
+		dta %01111110
+		dta %11111111
+		dta %10111001
+		dta %00001100
+		dta %00000100
+		dta %00000000
+		dta %00100000
+		dta %00000000
+		dta %00001000
+		dta %00010000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00111100 ; faze 7
+		dta %01111110
+		dta %11111111
+		dta %10111001
+		dta %00001100
+		dta %00000100
+		dta %00000000
+		dta %00100000
+		dta %00000000
+		dta %00010000
+		dta %00001000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00010000 ; faze 8
+		dta %01000110
+		dta %10110101
+		dta %10100001
+		dta %00001000
+		dta %00000100
+		dta %00000000
+		dta %00100000
+		dta %00000000
+		dta %00001000
+		dta %00010000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 9
+		dta %00000000
+		dta %00010000
+		dta %00100000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00100000
+		dta %00000000
+		dta %00001000
+		dta %00010000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 10
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 11
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 12
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+pete_mava_hrac_1 ; cerna barva
+		dta %00000000 ; faze 1
+		dta %00000000
+		dta %00111100
+		dta %01111110
+		dta %01001110
+		dta %01000010
+		dta %01100110
+		dta %01000010
+		dta %00011000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00011000
+		
+		dta %00000000 ; faze 2
+		dta %00000000
+		dta %00111100
+		dta %01111110
+		dta %01001110
+		dta %01000010
+		dta %01000010
+		dta %01000010
+		dta %00011000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00011000
+		
+		dta %00000000 ; faze 3
+		dta %00000000
+		dta %00111100
+		dta %01111110
+		dta %01001110
+		dta %01000010
+		dta %01100110
+		dta %01000010
+		dta %00011000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00011000
+		
+		dta %00000000 ; faze 4
+		dta %00000000
+		dta %00111100
+		dta %01111110
+		dta %01001110
+		dta %01000010
+		dta %01100110
+		dta %01000010
+		dta %00011000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00011000
+		
+		dta %00000000 ; faze 5
+		dta %00000000
+		dta %00111100
+		dta %01111110
+		dta %01001110
+		dta %01000010
+		dta %01100110
+		dta %01000010
+		dta %00011000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00011000
+		
+pete_mava_hrac_2 ; ruzova barva
+		dta %00000000 ; faze 1
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00110000
+		dta %00111100
+		dta %00011000
+		dta %00111100
+		dta %00100100
+		dta %00011000
+		dta %00011000
+		dta %00111100
+		dta %00100100
+		dta %00100100
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 2
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00110000
+		dta %00111100
+		dta %00111100
+		dta %00111100
+		dta %00100100
+		dta %00011000
+		dta %00011000
+		dta %00111100
+		dta %00100100
+		dta %00100100
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 3
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00110000
+		dta %00111100
+		dta %00011000
+		dta %00111100
+		dta %00100100
+		dta %00011000
+		dta %00011000
+		dta %00111100
+		dta %01100100
+		dta %00000100
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 4
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00110000
+		dta %00111100
+		dta %00011000
+		dta %00111100
+		dta %00100100
+		dta %00011000
+		dta %01011000
+		dta %00111100
+		dta %00000100
+		dta %00000100
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		
+		dta %00000000 ; faze 5
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00110000
+		dta %00111100
+		dta %00011000
+		dta %00111100
+		dta %00100100
+		dta %01011000
+		dta %01011000
+		dta %00111100
+		dta %00000100
+		dta %00000100
+		dta %00000000
+		dta %00000000
+		dta %00000000
+
+pete_mava_hrac_3 ; tmave modra barva
+		dta %00000000 ; faze 1
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00011000
+		dta %00111100
+		dta %00111100
+		dta %00011000
+		dta %00011000
+		dta %00011000
+		dta %00000000		
+		
+		dta %00000000 ; faze 2
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00011000
+		dta %00111100
+		dta %00111100
+		dta %00011000
+		dta %00011000
+		dta %00011000
+		dta %00000000		
+		
+		dta %00000000 ; faze 3
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00011000
+		dta %00111100
+		dta %00111100
+		dta %00011000
+		dta %00011000
+		dta %00011000
+		dta %00000000		
+		
+		dta %00000000 ; faze 4
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00011000
+		dta %00111100
+		dta %00011100
+		dta %00011000
+		dta %00011000
+		dta %00011000
+		dta %00000000		
+		
+		dta %00000000 ; faze 5
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %00000000
+		dta %01011000
+		dta %00111100
+		dta %00011100
+		dta %00011000
+		dta %00011000
+		dta %00011000
+		dta %00000000
+		
+radky_screenu
+		.word screen_game+2*$40
+		.word screen_game+4*$40
+		.word screen_game+6*$40
+		.word screen_game+8*$40
+		.word screen_game+10*$40
+		.word screen_game+12*$40
+		.word screen_game+14*$40
+		.word screen_game+16*$40
+		.word screen_game+18*$40
+		.word screen_game+20*$40
+		.word screen_game+22*$40
+		.word screen_game+24*$40
+		.word screen_game+26*$40
+		.word screen_game+28*$40
+		.word screen_game+30*$40
+		.word screen_game+32*$40
+		.word screen_game+34*$40
+		.word screen_game+36*$40
+		.word screen_game+38*$40
+		.word screen_game+40*$40
+		.word screen_game+42*$40
+		.word screen_game+44*$40
+		.word screen_game+46*$40
+		
+obtiznost_taken
+		dta $05,$10,$15
+		
+obtiznost_indexy
+		dta 0,6,12
+		
+obtiznost_napisy
+		dta d' YSAE '
+		dta d'LAMRON'
+		dta d' DRAH '
+		
+rychlost_napisy		
+		dta d' TSAF '
+		dta d'LAMRON'
+		
+ingame_hudby_rychlosti
+		dta 0,5,6,6
+		
+ingame_hudby_pointery_lo
+		dta 0
+		dta l(rmt_track_1)
+		dta l(rmt_track_2)
+		dta l(rmt_track_3)		
+ingame_hudby_pointery_hi
+		dta 0
+		dta h(rmt_track_1)
+		dta h(rmt_track_2)
+		dta h(rmt_track_3)
+		
+screen_congratulations
+		dta 89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,91,92,93,106,107
+		dta 108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,110,111,112,125,126
+		
+prehazovak_indexy
+		dta 4,7,3
+		
+status_bar
+		dta d'          '
+		dta 1
+		dta d':00   '
+		dta 3
+		dta d':000   '
+		dta 6
+		dta d':00            '
+		dta d'         '
+		dta 2
+		dta d':00   '
+		dta 4
+		dta d':000   '
+		dta 5
+		dta d':00       '				
+		
+logo_data
+		ins 'logo.dat'
+				
+title_screen
+		dta d'         CODE BY FANDAL         '
+		dta d'        GFX + MSX BY AKI        '
+		dta d'           APRIL 2019           '
+		dta d'           DIFFICULTY           '
+		dta d'      EASY      '		
+		dta d'     SEL/OPT TO TOGGLE INGAME MUSIC ON/OFF '
+		dta d'           RETURN TO SUICIDE, ESC TO QUIT GAME   '	
+		
+ovoce_pointery_lo		
+		dta l(status_bar_font+59*8)
+		dta l(status_bar_font+63*8)
+		dta l(status_bar_font+67*8)
+		dta l(status_bar_font+71*8)
+		dta l(status_bar_font+75*8)
+		dta l(status_bar_font+79*8)
+		dta l(status_bar_font+83*8)
+		dta l(font_game+113*8)
+		dta l(font_game+117*8)
+		dta l(font_game+121*8)
+		
+ovoce_pointery_hi		
+		dta h(status_bar_font+59*8)
+		dta h(status_bar_font+63*8)
+		dta h(status_bar_font+67*8)
+		dta h(status_bar_font+71*8)
+		dta h(status_bar_font+75*8)
+		dta h(status_bar_font+79*8)
+		dta h(status_bar_font+83*8)
+		dta h(font_game+113*8)
+		dta h(font_game+117*8)
+		dta h(font_game+121*8)			
+		
+		IFT CartridgeType = CartridgeXEX
+      org $3b00		
+		  opt h-
+    ELI CartridgeType = CartridgeComp16K
+      org $2b00
+    EIF
+		
+rmt_track_3
+		ins 'hudba3.rmt'
+    IFT CartridgeType = CartridgeXEX		
+		  opt h+					
+		  org $5000
+		  opt h-
+    ELI CartridgeType = CartridgeComp16K
+      org $4000
+    EIF
+		
+rmt_congratulations
+		ins 'congratulations.rmt' ; rychlost 5
+		IFT CartridgeType = CartridgeXEX
+		  opt h+
+		  org $5300
+      opt h-
+    ELI CartridgeType = CartridgeComp16K
+      org $4300      
+		EIF
+rmt_gameover    
+		ins 'gameover.rmt' ; rychlost 5
+		IFT CartridgeType = CartridgeXEX    
+		    pt h+	
+		    org $5a00
+    ELI CartridgeType = CartridgeComp16K
+        org $4A00        
+    EIF
+		
+rmt_player	
+    IFT CartridgeType = CartridgeXEX
+		    icl 'rmtplayer.a65'		
+		    ;;;
+    EIF		
+rmt_player_stereo	equ $6300
+    IFT CartridgeType = CartridgeXEX
+		    opt h-
+		    ins "rmt_stereo_player.obx" ; stereo player od $6300
+		    opt h+		
+		    ;;;
+		    org $6800		
+		    opt h-
+    ELI CartridgeType = CartridgeComp16K
+        org $5800        
+    EIF		
+rmt_title
+    ins 'hudba_title.rmt'
+		IFT CartridgeType = CartridgeXEX
+        opt h+					
+		    ;;;
+    		org $7700		
+    		opt h-
+    ELI CartridgeType = CartridgeComp16K
+        org $6700        
+    EIF		
+rmt_track_2
+		ins 'hudba2.rmt'
+		IFT CartridgeType = CartridgeXEX		
+		    opt h+
+		    ;;; 		
+		    org $8b00
+		    opt h-
+    ELI CartridgeType = CartridgeComp16K
+      org $7B00        
+    EIF		
+rmt_track_1
+		ins 'hudba1.rmt'
+		IFT CartridgeType = CartridgeXEX		
+		    opt h+			
+		    org $b800
+    ELI CartridgeType = CartridgeComp16K
+        org $A800        
+    EIF		
+nasad_ovoce_do_screenu
+
+		lda #<(screen_game+2*$40+6)
+		sta zapisnik
+		lda #>(screen_game+2*$40+6)
+		sta zapisnik+1	
+
+		ldx #45 ; kvuli resetu
+mazej_game_screen_krome_zdi		
+		ldy #$37
+		lda #0
+mazej_jeden_radek_game_screenu_krome_zdi
+		sta (zapisnik),y
+		dey
+		bpl mazej_jeden_radek_game_screenu_krome_zdi
+		
+		lda zapisnik
+		clc
+		adc #$40
+		sta zapisnik
+		lda zapisnik+1
+		adc #0
+		sta zapisnik+1
+		dex
+		bpl mazej_game_screen_krome_zdi
+		
+		lda #<(screen_game+$80)
+		sta zapisnik
+		lda #>(screen_game+$80)
+		sta zapisnik+1
+		
+		lda #22 ; pocet radku s ovocem
+		sta indexos
+		
+nasad_ovoce_do_jednoho_radku
+		ldx kytkos ; pocet kytek vysazenych do jednoho radku (na radku mame maximalne 30 ovoci)		
+losuj_pozici_kytky
+		lda $d20a
+		and #$3e ; chci pouze suda cisla
+		tay
+		lda (zapisnik),y
+		cmp #1
+		beq losuj_pozici_kytky
+		lda #3+128
+		sta (zapisnik),y
+		iny
+		lda #4+128
+		sta (zapisnik),y
+		tya
+		clc
+		adc #$3f
+		tay
+		lda #5
+		sta (zapisnik),y
+		iny
+		lda #6
+		sta (zapisnik),y
+		
+		dex
+		bne losuj_pozici_kytky		
+				
+		ldx #30 ; pocet ovoce vysazenych do jednoho radku (na radku mame maximalne 30 ovoci)
+		lda level
+		and #$0f
+		tay		
+losuj_pozici_ovoce
+		lda $d20a
+		and #$3e ; chci pouze suda cisla
+		tay
+		lda (zapisnik),y
+		cmp #1
+		beq losuj_pozici_ovoce
+		lda #7
+		sta (zapisnik),y
+		iny
+		lda #8
+		sta (zapisnik),y
+		tya
+		clc
+		adc #$3f
+		tay
+		lda #9
+		sta (zapisnik),y
+		iny
+		lda #10
+		sta (zapisnik),y		
+		dex
+		bne losuj_pozici_ovoce
+		
+		lda zapisnik
+		clc
+		adc #$80
+		sta zapisnik
+		lda zapisnik+1
+		adc #0
+		sta zapisnik+1
+		dec indexos
+		bpl nasad_ovoce_do_jednoho_radku		
+
+		lda $d20a	
+		bpl level_neobsahuje_truhlu
+		
+		jsr losuj_pozici_predmetu ; pozice ve screen memory se vrati ve wordu zapisnik + v registru Y
+		sty truhla_y+1		
+		sta truhla_lo+1				
+		stx truhla_hi+1
+		ldx #$af ; truhla
+		jsr zapis_predmet	
+		
+level_neobsahuje_truhlu
+		lda $d20a
+		bpl level_neobsahuje_reset
+		
+		jsr losuj_pozici_predmetu ; pozice ve screen memory se vrati ve wordu zapisnik + v registru Y		
+		sty reset_y+1		
+		sta reset_lo+1				
+		stx reset_hi+1
+		ldx #11 ; reset
+		jsr zapis_predmet
+		
+level_neobsahuje_reset
+		lda $d20a
+		bpl level_neobsahuje_dvere
+				
+		jsr losuj_pozici_predmetu ; pozice ve screen memory se vrati ve wordu zapisnik + v registru Y
+		sty dvere_y+1		
+		sta dvere_lo+1				
+		stx dvere_hi+1
+		ldx #15 ; dvere
+		jsr zapis_predmet
+		
+level_neobsahuje_dvere
+		lda $d20a
+		bpl level_neobsahuje_stit
+		
+		jsr losuj_pozici_predmetu ; pozice ve screen memory se vrati ve wordu zapisnik + v registru Y
+		sty stit_y+1		
+		sta stit_lo+1				
+		stx stit_hi+1
+		ldx #19+128 ; stit
+		jsr zapis_predmet
+		
+level_neobsahuje_stit		
+		jsr losuj_pozici_predmetu ; pozice ve screen memory se vrati ve wordu zapisnik + v registru Y
+		sty lahev_y+1		
+		sta lahev_lo+1				
+		stx lahev_hi+1
+		ldx #23 ; lahev
+		jsr zapis_predmet
+		
+		jsr losuj_pozici_predmetu ; pozice ve screen memory se vrati ve wordu zapisnik + v registru Y
+		sty bota_y+1		
+		sta bota_lo+1				
+		stx bota_hi+1
+		ldx #27 ; bota
+		jsr zapis_predmet
+		
+		lda $d20a
+		bpl level_neobsahuje_teleport
+		
+		jsr losuj_pozici_predmetu ; pozice ve screen memory se vrati ve wordu zapisnik + v registru Y
+		sty teleport_y+1		
+		sta teleport_lo+1				
+		stx teleport_hi+1
+		ldx #31+128 ; teleport
+		jsr zapis_predmet
+			
+level_neobsahuje_teleport		
+		jsr zjisti_pozici_panaka
+		jsr smaz_misto_pod_svistem
+		
+		lda level
+		and #$0f
+		tax
+		lda ovoce_pointery_lo,x
+		sta zapisnik
+		lda ovoce_pointery_hi,x
+		sta zapisnik+1
+		
+		ldy #31
+zkopiruj_aktualni_ovoce_do_fontu
+		lda (zapisnik),y
+		sta font_game+7*8,y
+		lda font_backup+3*8,y ; zkopirovani kytky
+		sta font_game+3*8,y
+		dey
+		bpl zkopiruj_aktualni_ovoce_do_fontu			
+		
+		rts	
+		
+losuj_pozici_predmetu ; chceme suda cisla $06 az $3c
+		lda $d20a
+		and #$7e
+		cmp #$38
+		bcs losuj_pozici_predmetu
+		clc
+		adc #6
+		tay
+		;ldy #6 ; test levy horni roh		
+		
+losuj_xovou_pozici_predmetu
+		lda $d20a
+		and #$1f
+		cmp #23
+		bcs losuj_xovou_pozici_predmetu
+		asl @		
+		tax		
+		;ldx #0 ; test levy horni roh
+		lda radky_screenu,x
+		sta zapisnik
+		lda radky_screenu+1,x
+		sta zapisnik+1
+		tax
+		lda zapisnik		
+
+		rts
+		
+zapis_predmet
+		txa
+		sta (zapisnik),y
+		iny
+		inx
+		txa
+		sta (zapisnik),y
+		tya
+		clc
+		adc #$3f
+		tay
+		inx
+		txa
+		sta (zapisnik),y
+		iny
+		inx
+		txa
+		sta (zapisnik),y
+		rts
+		
+zapis_barvy_levelu
+		lda level
+		and #$0f
+		tax
+		lda barva_levelu_708,x
+		sta 708
+		lda barva_levelu_709,x
+		sta 709
+		lda barva_levelu_711,x
+		sta 711		
+		lda #$a6 ; zelena
+		sta 710		
+		rts
+		
+smazani_predmetu
+
+truhla_lo
+		lda #$ff
+		sta zapisnik
+truhla_hi
+		lda #$ff
+		sta zapisnik+1
+truhla_y
+		ldy #$ff		
+		jsr smaz_predmet		
+		
+reset_lo
+		lda #$ff
+		sta zapisnik
+reset_hi
+		lda #$ff
+		sta zapisnik+1
+reset_y
+		ldy #$ff
+		jsr smaz_predmet
+		
+dvere_lo
+		lda #$ff
+		sta zapisnik
+dvere_hi
+		lda #$ff
+		sta zapisnik+1
+dvere_y
+		ldy #$ff
+		jsr smaz_predmet
+		
+stit_lo
+		lda #$ff
+		sta zapisnik
+stit_hi
+		lda #$ff
+		sta zapisnik+1
+stit_y
+		ldy #$ff
+		jsr smaz_predmet		
+		
+lahev_lo
+		lda #$ff
+		sta zapisnik
+lahev_hi
+		lda #$ff
+		sta zapisnik+1
+lahev_y
+		ldy #$ff
+		jsr smaz_predmet				
+		
+bota_lo
+		lda #$ff
+		sta zapisnik
+bota_hi
+		lda #$ff
+		sta zapisnik+1
+bota_y
+		ldy #$ff
+		jsr smaz_predmet						
+		
+teleport_lo
+		lda #$ff
+		sta zapisnik
+teleport_hi
+		lda #$ff
+		sta zapisnik+1
+teleport_y
+		ldy #$ff
+		jsr smaz_predmet		
+
+		rts
+		
+smaz_predmet
+		lda #0 ; smazani truhly
+		sta (zapisnik),y
+		iny
+		sta (zapisnik),y
+		tya
+		clc
+		adc #$3f
+		tay
+		lda #0
+		sta (zapisnik),y
+		iny
+		sta (zapisnik),y		
+		rts
+		
+smaz_misto_pod_svistem
+		lda #0
+		ldy #$40
+		sta (zapisnik),y
+		iny
+		sta (zapisnik),y
+		ldy #$80
+		sta (zapisnik),y
+		iny
+		sta (zapisnik),y
+		rts
+		
+nastav_vsechny_barvy_na_e0
+		lda #$e0
+		sta 708
+		sta 709
+		sta 710
+		sta 711
+		sta 712
+		rts
+		
+inicializuj_predmetovou_caru
+		lda #$aa
+		ldx #31
+zapis_caru_teplomeru
+		sta screen_predmetova_cara,x
+		dex
+		bpl zapis_caru_teplomeru
+		lda #0
+		sta levak
+		lda #31
+		sta pravak
+		rts
+		
+smaz_predmetovou_caru
+		ldx #31
+		lda #0
+maz_predmetovou_caru
+		sta screen_predmetova_cara,x
+		dex
+		bpl maz_predmetovou_caru
+		rts
+		
+pust_sfx_pro_sebrani_predmetu
+		lda rmt_mode
+		beq pust_efekt_predmetu_do_kanalu0
+		lda #$1e
+		sta rmt_efekt2
+		rts
+pust_efekt_predmetu_do_kanalu0
+		lda #$1e
+		sta rmt_efekt
+		rts
+		
+pust_sfx_pro_sebrani_negativniho_predmetu
+		lda rmt_mode
+		beq pust_efekt_negativniho_predmetu_do_kanalu0
+		lda #$25
+		sta rmt_efekt2
+		rts
+pust_efekt_negativniho_predmetu_do_kanalu0
+		lda #$25
+		sta rmt_efekt
+		rts		
+		
+uber_z_predmetove_cary
+		ldx levak
+		lda screen_predmetova_cara,x
+		lsr @
+		lsr @
+		sta screen_predmetova_cara,x
+		bne levy_predmetus_ok
+		inc levak		
+levy_predmetus_ok
+		ldx pravak
+		lda screen_predmetova_cara,x
+		asl @
+		asl @
+		sta screen_predmetova_cara,x
+		bne pravy_predmetus_ok
+		dec pravak
+pravy_predmetus_ok
+		rts			
+		
+nahod_normalni_smery_joysticku
+		lda #11 ; default je normalni ovladani joysticku
+		sta chce_snad_levy_sprej_ten_hrac_nebo_jako_o_co_tady_jde+1		
+		sta sahnul_na_joystick+1
+		lda #7
+		sta nechce_panakem_doleva+1
+		sta nechce_levy_sprej+1
+		lda #13
+		sta nechce_panakem_doprava+1
+		sta nechce_pravy_sprej+1
+		lda #14
+		sta nechce_panakem_dolu+1
+		sta nechce_dolni_sprej+1		
+		rts
+		
+nahod_otocene_smery_joysticku
+		lda #7 ; default je normalni ovladani joysticku
+		sta chce_snad_levy_sprej_ten_hrac_nebo_jako_o_co_tady_jde+1		
+		sta sahnul_na_joystick+1
+		lda #11
+		sta nechce_panakem_doleva+1
+		sta nechce_levy_sprej+1
+		lda #14
+		sta nechce_panakem_doprava+1
+		sta nechce_pravy_sprej+1
+		lda #13
+		sta nechce_panakem_dolu+1
+		sta nechce_dolni_sprej+1		
+		rts
+		
+animace_reset_indexy
+		dta 31,32+31,64+31,32+31
+
+animace_reset		
+		dta $00,$00,$01,$05,$11,$14,$11,$25
+		dta $00,$00,$40,$50,$44,$14,$44,$58
+		dta $29,$2A,$2A,$2A,$3A,$0E,$03,$00
+		dta $68,$A8,$A8,$A8,$AC,$B0,$C0,$00
+		
+		dta $00,$00,$00,$01,$05,$11,$14,$11
+		dta $00,$00,$00,$40,$50,$44,$14,$44
+		dta $25,$29,$2A,$2A,$3A,$0E,$03,$00
+		dta $58,$68,$A8,$A8,$AC,$B0,$C0,$00
+		
+		dta $00,$00,$00,$00,$01,$05,$11,$14
+		dta $00,$00,$00,$00,$40,$50,$44,$14
+		dta $11,$25,$29,$2A,$3A,$0E,$03,$00
+		dta $44,$58,$68,$A8,$AC,$B0,$C0,$00
+		
+animace_dvere_indexy
+		dta 96+31,64+31,32+31,31,31,31,31,31
+		dta 31,32+31,64+31,96+31,96+31,96+31,96+31,96+31
+		
+animace_dvere
+		dta $40,$60,$60,$60,$60,$60,$60,$70
+		dta $00,$00,$00,$00,$00,$00,$00,$00
+		dta $70,$60,$60,$60,$60,$60,$60,$40
+		dta $00,$00,$00,$00,$00,$00,$00,$00
+		
+		dta $40,$60,$48,$42,$40,$42,$40,$43
+		dta $00,$00,$00,$00,$80,$80,$80,$80
+		dta $43,$40,$48,$40,$42,$48,$60,$40
+		dta $80,$80,$80,$80,$00,$00,$00,$00
+		
+		dta $40,$54,$41,$44,$44,$44,$40,$41
+		dta $00,$00,$80,$28,$88,$88,$08,$38
+		dta $41,$40,$44,$44,$44,$41,$54,$40
+		dta $38,$08,$48,$48,$28,$80,$00,$00
+		
+		dta $55,$40,$40,$44,$44,$41,$41,$40
+		dta $55,$01,$01,$11,$11,$41,$41,$0D
+		dta $40,$41,$41,$44,$44,$40,$40,$55
+		dta $0D,$41,$41,$11,$11,$01,$01,$55
+		
+animace_stit_indexy
+		dta 31,31,31,32+31,64+31,32+31,31,31
+		
+animace_stit
+		dta $01,$14,$41,$45,$7F,$75,$7D,$75
+		dta $80,$28,$82,$A2,$F2,$EE,$F2,$E2
+		dta $45,$11,$11,$11,$11,$04,$01,$01
+		dta $A2,$88,$88,$88,$88,$20,$80,$80
+		
+		dta $01,$04,$05,$05,$07,$07,$07,$07
+		dta $80,$20,$A0,$A0,$E0,$E0,$E0,$E0
+		dta $05,$05,$05,$05,$05,$04,$01,$01
+		dta $A0,$A0,$A0,$A0,$A0,$20,$80,$80
+		
+		dta $01,$00,$01,$01,$01,$01,$01,$01
+		dta $80,$00,$80,$80,$80,$80,$80,$80
+		dta $01,$01,$01,$01,$01,$00,$01,$01
+		dta $80,$80,$80,$80,$80,$00,$80,$80
+		
+animace_lahev_indexy
+		dta 31,32+31,64+31,32+31		
+		
+animace_lahev
+		dta $00,$03,$03,$01,$01,$01,$04,$04
+		dta $00,$C0,$C0,$80,$80,$80,$20,$20
+		dta $10,$10,$13,$1F,$1F,$1F,$1F,$2A
+		dta $08,$08,$08,$C8,$F8,$F8,$F8,$A8
+		
+		dta $00,$03,$03,$01,$01,$01,$04,$04
+		dta $00,$C0,$C0,$80,$80,$80,$20,$20
+		dta $10,$10,$10,$1F,$1F,$1F,$1F,$2A
+		dta $08,$08,$08,$F8,$F8,$F8,$F8,$A8
+		
+		dta $00,$03,$03,$01,$01,$01,$04,$04
+		dta $00,$C0,$C0,$80,$80,$80,$20,$20
+		dta $10,$10,$10,$13,$1F,$1F,$1F,$2A
+		dta $08,$08,$C8,$F8,$F8,$F8,$F8,$A8
+		
+;animace_bota_indexy
+;		dta 31,32+31,64+31,32+31		
+		
+animace_bota
+		dta $00,$00,$00,$00,$00,$00,$15,$65
+		dta $11,$25,$19,$25,$19,$25,$15,$55
+		dta $55,$55,$95,$EA,$FF,$FF,$FF,$FF
+		dta $55,$55,$AA,$EA,$FF,$FF,$FF,$FF
+		
+		dta $00,$00,$00,$00,$00,$00,$00,$00
+		dta $00,$00,$11,$25,$19,$25,$19,$25
+		dta $15,$65,$75,$55,$F7,$FF,$FF,$FF		
+		dta $15,$5D,$D5,$57,$EF,$FF,$FF,$FF
+		
+		dta $00,$00,$00,$00,$00,$00,$00,$03
+		dta $00,$00,$00,$00,$11,$25,$19,$2D
+		dta $C0,$0C,$15,$67,$75,$F7,$FF,$FF
+		dta $19,$27,$15,$5F,$FF,$FF,$FF,$FF
+		
+;animace_teleport_indexy
+;		dta 31,32+31,64+31,32+31		
+				
+animace_teleport
+		dta $00,$55,$40,$4F,$40,$4F,$4F,$43
+		dta $00,$55,$02,$F2,$02,$F2,$F2,$C2
+		dta $43,$43,$43,$43,$40,$4F,$40,$6A
+		dta $C2,$C2,$C2,$C2,$02,$F2,$02,$AA
+		
+		dta $00,$55,$40,$4F,$40,$45,$45,$41
+		dta $00,$55,$02,$F2,$02,$52,$52,$42
+		dta $41,$41,$41,$41,$40,$4F,$40,$6A
+		dta $42,$42,$42,$42,$02,$F2,$02,$AA
+		
+		dta $00,$55,$40,$4F,$40,$4A,$4A,$42
+		dta $00,$55,$02,$F2,$02,$A2,$A2,$82
+		dta $42,$42,$42,$42,$40,$4F,$40,$6A
+		dta $82,$82,$82,$82,$02,$F2,$02,$AA		
+		
+verze_1_1_do_screenu
+		lda #%00001000
+		sta screen_game+$859-5*32
+		sta screen_game+$859-3*32
+		sta screen_game+$859-2*32
+		sta screen_game+$859-32
+		lda #%00101000
+		sta screen_game+$859-4*32
+		lda #%10000000
+		sta screen_game+$858-5*32
+		sta screen_game+$858-4*32
+		sta screen_game+$858-3*32		
+		sta screen_game+$858-2*32
+		lda #%10000010
+		sta screen_game+$858-32
+		lda #%10100010
+		sta screen_game+$858
+		lda #%00101010
+		sta screen_game+$859		
+		rts				
+		
+    IFT CartridgeType = CartType520032K||CartridgeType = CartridgeStandard16K||CartridgeType = CartridgeMegaCart16K
+DLIST_INIT
+  		dta $0,$60,$30
+  		dta 64+4+32+16
+DLIST_INIT_POINTER1  ; 1
+  		.word screen_game
+  		dta 64+4+32+16
+DLIST_INIT_POINTER2	
+  		.word screen_game+$40
+  		dta 64+4+32+16
+DLIST_INIT_POINTER3 ; 2		
+  		.word screen_game+2*$40
+  		dta 64+4+32+16
+DLIST_INIT_POINTER4		
+  		.word screen_game+3*$40
+  		dta 64+4+32+16
+DLIST_INIT_POINTER5	; 3	
+  		.word screen_game+4*$40
+  		dta 64+4+32+16
+DLIST_INIT_POINTER6		
+  		.word screen_game+5*$40
+  		dta 64+4+32+16
+DLIST_INIT_POINTER7	;4	
+  		.word screen_game+6*$40
+  		dta 64+4+32+16+128
+DLIST_INIT_POINTER8		
+  		.word screen_game+7*$40
+  		dta 64+4+32+16
+DLIST_INIT_POINTER9	; 5	
+  		.word screen_game+8*$40
+  		dta 64+4+32+16
+DLIST_INIT_POINTER10		
+  		.word screen_game+9*$40
+  		dta 64+4+32+16
+DLIST_INIT_POINTER11 ; 6
+  		.word screen_game+10*$40
+  		dta 64+4+32+16
+DLIST_INIT_POINTER12		
+  		.word screen_game+11*$40
+  		dta 64+4+32+16
+DLIST_INIT_POINTER13	; 7	
+  		.word screen_game+12*$40
+  		dta 64+4+32+16
+DLIST_INIT_POINTER14		
+  		.word screen_game+13*$40
+  		dta 64+4+32+16
+DLIST_INIT_POINTER15		
+  		.word screen_game+14*$40
+  		dta 64+4+32+16
+DLIST_INIT_POINTER16		
+  		.word screen_game+15*$40
+  		dta 64+4+32+16
+DLIST_INIT_POINTER17		
+  		.word screen_game+16*$40
+  		dta 64+4+32+16
+DLIST_INIT_POINTER18		
+  		.word screen_game+17*$40
+  		dta 64+4+32+16
+DLIST_INIT_POINTER19		
+  		.word screen_game+18*$40
+  		dta 64+4+32+16
+DLIST_INIT_POINTER20		
+  		.word screen_game+19*$40
+  		dta 64+4+32+16
+DLIST_INIT_POINTER21		
+  		.word screen_game+20*$40
+  		dta 64+4+32+16
+DLIST_INIT_POINTER22		
+  		.word screen_game+21*$40
+  		dta 64+4+32+16
+DLIST_INIT_POINTER23		
+  		.word screen_game+22*$40
+  		dta 64+4+32+16
+DLIST_INIT_POINTER24
+  		.word screen_game+23*$40	
+  		dta 64+4+16
+DLIST_INIT_POINTER25		
+  		.word screen_game+24*$40
+  		dta 0
+  		dta 0+128		
+  		dta 64+$0d
+  		.word screen_predmetova_cara
+  		dta $10
+  		dta 64+15
+  		.word pmg
+  		dta 15
+  		dta 64+2+16
+DLIST_INIT_status_bar
+  		.word status_bar
+  		dta 64+15
+  		.word pmg
+  		dta 64+2+16
+  		.word status_bar+40
+  		dta 64+15+128
+  		.word pmg
+  		dta 65
+  		.word dlist_game
+    EIF      
+
+    IFT CartridgeType = CartridgeXEX
+		    run totalni_start
+    EIF
+		

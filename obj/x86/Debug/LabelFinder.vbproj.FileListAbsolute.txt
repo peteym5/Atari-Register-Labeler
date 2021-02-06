@@ -1,0 +1,10 @@
+E:\Projects\LabelFinder\obj\x86\Debug\LabelFinder.vbproj.GenerateResource.Cache
+E:\Projects\LabelFinder\bin\Debug\LabelConv.exe.config
+E:\Projects\LabelFinder\bin\Debug\LabelConv.exe
+E:\Projects\LabelFinder\bin\Debug\LabelConv.pdb
+E:\Projects\LabelFinder\bin\Debug\LabelConv.xml
+E:\Projects\LabelFinder\obj\x86\Debug\LabelConv.LabelFinder.resources
+E:\Projects\LabelFinder\obj\x86\Debug\LabelConv.Resources.resources
+E:\Projects\LabelFinder\obj\x86\Debug\LabelConv.exe
+E:\Projects\LabelFinder\obj\x86\Debug\LabelConv.xml
+E:\Projects\LabelFinder\obj\x86\Debug\LabelConv.pdb
