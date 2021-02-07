@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class LabelFinder
+Partial Class RegisterLabeler
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.

@@ -3,10 +3,10 @@ E:\Projects\LabelReplacer\bin\Release\LabelConv.exe
 E:\Projects\LabelReplacer\bin\Release\LabelConv.pdb
 E:\Projects\LabelReplacer\bin\Release\LabelConv.xml
 E:\Projects\LabelReplacer\obj\x86\Release\AtariRegisterLabeler.vbprojAssemblyReference.cache
-E:\Projects\LabelReplacer\obj\x86\Release\LabelConv.LabelFinder.resources
 E:\Projects\LabelReplacer\obj\x86\Release\LabelConv.Resources.resources
 E:\Projects\LabelReplacer\obj\x86\Release\AtariRegisterLabeler.vbproj.GenerateResource.cache
 E:\Projects\LabelReplacer\obj\x86\Release\AtariRegisterLabeler.vbproj.CoreCompileInputs.cache
 E:\Projects\LabelReplacer\obj\x86\Release\LabelConv.exe
 E:\Projects\LabelReplacer\obj\x86\Release\LabelConv.xml
 E:\Projects\LabelReplacer\obj\x86\Release\LabelConv.pdb
+E:\Projects\LabelReplacer\obj\x86\Release\LabelConv.RegisterLabeler.resources
